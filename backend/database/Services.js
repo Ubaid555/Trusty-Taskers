@@ -5,7 +5,8 @@ const serviceSchema = new mongoose.Schema({
     phone: Number,
     category:String,
     price:Number,
-    description:String
+    description:String,
+    userId:String
 });
 
 module.exports = mongoose.model("services", serviceSchema);

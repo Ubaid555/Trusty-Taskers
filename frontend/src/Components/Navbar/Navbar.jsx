@@ -28,6 +28,7 @@ const Navbar = () => {
                     <NavLink className={isAuthenticated ? "item inActiveStyle" : "item activeStyle"} to='/'>Home</NavLink>
                     <NavLink className={isAuthenticated ? "item inActiveStyle" : "item activeStyle"} to="/about">About</NavLink>
                     <NavLink className={isAuthenticated ? "item inActiveStyle" : "item activeStyle"} to="/contact">Contact Us</NavLink>
+                    <NavLink className={isAuthenticated ? "item inActiveStyle" : "item activeStyle"} to="/addservice">Add Services</NavLink>
                     <NavLink className={isAuthenticated ? "item inActiveStyle" : "item activeStyle"} to="/services">Services</NavLink>
                     <NavLink className={isAuthenticated ? "item inActiveStyle" : "item activeStyle"} to="/profile">Profile</NavLink>
             </ul>   

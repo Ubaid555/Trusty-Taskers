@@ -11,9 +11,9 @@ import { HiMail } from "react-icons/hi";
 import { useState } from "react";
 
 const ContactForm = () => {
-  const [name, setName] = useState("Anshu");
-  const [email, setEmail] = useState("support@dosomecoding.com");
-  const [text, setText] = useState("Subscribe to this channel");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [text, setText] = useState("");
 
   const onSubmit = (event) => {
     event.preventDefault();
@@ -66,7 +66,7 @@ const ContactForm = () => {
             <Button text="Submit Now" />
           </div>
 
-          <div>{name + " " + email + " " + text}</div>
+          {/*<div>{name + " " + email + " " + text}</div>*/}
         </form>
       </div>
       <div className={styles.contact_image}>
@@ -80,3 +80,94 @@ const ContactForm = () => {
 
 export default ContactForm;
 
+
+
+
+// import React, { useState } from "react";
+// import Button from "../Button/Button";
+// import styles from "./Contact.module.css";
+// import { MdMessage } from "react-icons/md";
+// import { FaPhoneAlt } from "react-icons/fa";
+// import { HiMail } from "react-icons/hi";
+
+// const ContactForm = () => {
+//   const [name, setName] = useState("");
+//   const [email, setEmail] = useState("");
+//   const [text, setText] = useState("");
+
+//   const onSubmit = async (event) => {
+//     event.preventDefault();
+
+//     const response = await fetch("http://localhost:5000/send", {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify({
+//         name,
+//         email,
+//         message: text,
+//       }),
+//     });
+
+//     const result = await response.json();
+//     console.log(result);
+//     alert(result);
+//   };
+
+//   return (
+//     <>
+//       <section className={styles.container}>
+//         <div className={styles.contact_form}>
+//           <div className={styles.top_btn}>
+//             <Button text="Via Support Chat" icon={<MdMessage fontSize="24px" />} />
+//             <Button text="Via Email Form" icon={<HiMail fontSize="24px" />} />
+//           </div>
+//           <Button text="Via Phone" icon={<FaPhoneAlt fontSize="24px" />} />
+//           <form className="form" onSubmit={onSubmit}>
+//             <div className={styles.form_control}>
+//               <label htmlFor="name">Name</label>
+//               <input
+//                 type="text"
+//                 name="name"
+//                 value={name}
+//                 onChange={(e) => setName(e.target.value)}
+//               />
+//             </div>
+//             <div className={styles.form_control}>
+//               <label htmlFor="email">Email</label>
+//               <input
+//                 type="email"
+//                 name="email"
+//                 value={email}
+//                 onChange={(e) => setEmail(e.target.value)}
+//               />
+//             </div>
+//             <div className={styles.form_control}>
+//               <label htmlFor="text">Message</label>
+//               <textarea
+//                 name="text"
+//                 rows="8"
+//                 value={text}
+//                 onChange={(e) => setText(e.target.value)}
+//               />
+//             </div>
+//             <div
+//               style={{
+//                 display: "flex",
+//                 justifyContent: "end",
+//               }}
+//             >
+//               <Button text="Submit Now" />
+//             </div>
+//           </form>
+//         </div>
+//         <div className={styles.contact_image}>
+//           <img src="/Images/Service.png" alt="contact img" />
+//         </div>
+//       </section>
+//     </>
+//   );
+// };
+
+// export default ContactForm;

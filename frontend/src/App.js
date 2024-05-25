@@ -16,6 +16,8 @@ import BookingForm from './Components/Booking Form/BookingForm';
 import { PrivateComponent } from './Components/Private Component/PrivateComponent';
 import { Profile } from './Components/Profile/Profile';
 import { ForgotPassword } from './Components/Forgot Password/ForgotPassword';
+import AllUsers from './Components/All Users/AllUsers';
+import AddServices from './Components/Add Services/AddServices';
 //import { Logout } from './Components/Logout component/Logout';
 
 function App() {
@@ -34,7 +36,8 @@ function App() {
             <Route path='/bookingform' element={<BookingForm/>}/>
             <Route path='/partnerships' element={<Partnerships/>}/>
             <Route path='/profile' element={<Profile/>}/>
-            
+            <Route path='/addservice' element={<AddServices/>}/>
+            <Route path='/allusers' element={<AllUsers/>}/>
            </Route>
 
             <Route path='/' exact element={<Herosec/>}/>
