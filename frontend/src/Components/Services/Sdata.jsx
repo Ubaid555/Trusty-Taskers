@@ -34,6 +34,24 @@ const Sdata=[
         imgsrc:"https://media.istockphoto.com/id/1262563154/vector/repairman-man-character-repairing-broken-tv-flat-vector-illustration-isolated.jpg?s=612x612&w=0&k=20&c=hPFWV8tQrGxtYeJ0p7mqKNYRSr7FX144z2-O7soKh6w=",
         title:"Connectivity Craftsmen",
         sname:"CABLE OPERATOR",
+    },
+    {
+        id: 7,
+        imgsrc:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2YpCWdekQPUvVEWL0mXcXurhl0WRpvPHHnA&usqp=CAU",
+        title:"From Pipes to Perfect",
+        sname:"PLUMBER",
+    },
+    {
+        id: 8,
+        imgsrc:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHswzmDErTkwkX0t5m7od4GWPsoO-jZQi3OQ&usqp=CAU",
+        title:"Let Us Light up the Way",
+        sname:"ELECTRICIAN",
+    },
+    {
+        id: 9,
+        imgsrc:"https://png.pngtree.com/png-clipart/20211012/ourlarge/pngtree-worker-team-cartoon-png-image_3981346.png",
+        title:"Champions of Hard Work",
+        sname:"LABOR",
     }
 ]
 export default Sdata;

@@ -66,7 +66,7 @@ const ContactForm = () => {
             <Button text="Submit Now" />
           </div>
 
-          {/*<div>{name + " " + email + " " + text}</div>*/}
+          <div>{name + " " + email + " " + text}</div>
         </form>
       </div>
       <div className={styles.contact_image}>

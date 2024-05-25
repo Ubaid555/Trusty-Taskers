@@ -1,6 +1,7 @@
 const express=require('express');
 require('./database/config');
 const User = require('./database/User');
+const Service = require('./database/Services')
 const cors = require('cors');
 
 const app = express();
@@ -85,4 +86,21 @@ app.post('/forgotpassword', async (req, resp) => {
         }
     })*/
 });
+
+app.post('/services',async(req,resp)=>{
+    let service = new Service(req.body);
+    let result = await service.save();
+    resp.send(result);
+})
+
+app.get('/services',async(req,resp)=>{
+    let service = await Service.find();
+    if(service.length>0){
+        resp.send(service)
+    }
+    else{ 
+        resp.send({result:"No Product's Found"})
+    }
+})
+
 app.listen(4500);
