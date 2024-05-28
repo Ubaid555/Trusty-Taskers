@@ -1,51 +1,159 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+.main_heading {
+  padding: 30px 0;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 13px;
+  letter-spacing: 2px;
+  font-weight: 600;
+  color: #000000;
+  font-size: 1.5rem;
+  background-color: #fecaca;
+  margin-top: 93px;
 }
 
-.main_heading{
-    padding: 30px 0;
-    text-align: center;
-    text-transform: uppercase;
-    font-size: 13px;
-    letter-spacing: 2px;
-    font-weight: 600;
-    color: #000000;
-    font-size: 1.5rem;
-    margin-bottom: 30px;
-    background-color: #fecaca;
-    margin-top: 93px;
-  }
-  .profile {
-  border: 1px solid #ddd;
-  border-radius: 5px;
+
+.section_white {
+  background: #fff;
   padding: 20px;
-  background-color: #f9f9f9;
-  max-width: 600px;
-  margin: 0 auto;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-top: 50px;
+  margin-bottom: 50px;
 }
 
-.details {
-    background-color: #f4f4f4;
-    border-radius: 5px;
-    padding: 20px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-}
-.field {
-    font-size: 1.1rem;
-    margin: 15px 0;
+.card {
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+  padding: 20px;
+  border-radius: 8px;
+  width: 100%; /* Ensures card takes full width of the container */
 }
 
-
-.details p {
-    margin-bottom: 10px;
-    font-size: 16px;
-    color: #555;
+.teamImg {
+  max-width: 400px;
+  height: auto; /* Adjust height to keep aspect ratio */
+  padding: 6px;
+  background-color: #dedede;
+  border-radius: 8px; /* Make it a rectangle instead of a circle */
+  object-fit: cover;
+  margin-right: 120px;
+  margin-left: 120px;
+  margin-top: 5px;
 }
 
-.details strong {
-    font-weight: bold;
-    color: #333;
+.cardInfo {
+  flex-grow: 1;
+  width: 40%; /* Takes up part of the width of the card */
+}
+
+.cardCategory, .cardTitle{
+  display: block;
+  margin-bottom: 10px;
+  color: #555;
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
+.formGroup label {
+  text-transform: uppercase;
+  position: absolute;
+  background-color:white;
+  font-size: 14px;
+  margin-left: 10px;
+  margin-top: -10px;
+  padding: 0 10px;
+
+}
+
+.formGroup {
+  margin-bottom: 15px;
+}
+
+.cardInput {
+  width: 60%; /* Takes up part of the width of the cardInfo section */
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box; /* Ensures padding and border are included in the element's total width and height */
+  margin-bottom: 10px; /* Ensures consistent spacing between elements */
+}
+
+.cardBtn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #d01c28;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+  margin-top: 15px;
+  width: 55%;
+  text-align: center;
+}
+
+.cardBtn:hover {
+  background-color: #c71a24;
+}
+
+.noServices {
+  font-size: 18px;
+  color: #888;
+  text-align: center;
+  margin-top: 50px;
+}
+
+/* Media Queries for responsive design at width 1024px or less */
+@media (max-width: 1024px) {
+  .card {
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center items horizontally */
+    text-align: center; /* Center text within card */
+  }
+
+  .teamImg {
+    margin-bottom: 30px;
+  }
+
+  .cardInfo {
+    width: 100%; /* Takes full width */
+    margin-top: 20px;
+  }
+
+  .cardInput {
+    width: 100%; /* Takes full width */
+  }
+
+  .cardBtn {
+    width: 92%; /* Takes full width */
+  }
+}
+
+@media (max-width: 768px) {
+  .card {
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center items horizontally */
+    text-align: center; /* Center text within card */
+  }
+
+  .teamImg {
+    max-width: 350px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 30px;
+  }
+
+  .cardInfo {
+    width: 100%; /* Takes full width */
+    margin-top: 20px;
+  }
+
+  .cardInput {
+    width: 100%; /* Takes full width */
+  }
+
+  .cardBtn {
+    width: 90%; /* Takes full width */
+  }
 }

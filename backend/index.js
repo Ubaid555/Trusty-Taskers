@@ -3,6 +3,7 @@ require("./database/config");
 const User = require("./database/User");
 const Service = require("./database/Services");
 const cors = require("cors");
+const Services = require("./database/Services");
 
 const app = express();
 app.use(express.json());
@@ -76,10 +77,22 @@ app.post("/forgotpassword", async (req, resp) => {
     })*/
 });
 
+//Add New Service
 app.post("/services", async (req, resp) => {
-  let service = new Service(req.body);
-  let result = await service.save();
-  resp.send(result);
+  let service;
+  let category = req.body.category;
+  let userId = req.body.userId;
+
+  const existingUser = await Service.findOne({ userId, category });
+  if (existingUser) {
+    return resp.send({
+      result: "You have Already Registered with this service",
+    });
+  } else {
+    let service = new Service(req.body);
+    let result = await service.save();
+    resp.send(result);
+  }
 });
 
 //Viewing Services
@@ -104,7 +117,35 @@ app.get("/services", async (req, resp) => {
     }
   } else {
     resp.send({ result: "No services found" });
-  }
+  } 
 });
+
+app.get("/showProfile", async(req,resp)=>{
+    let user = req.query.userId;
+    let result = await Service.find({userId : user});
+    resp.send(result)
+})
+
+app.put("/updateProfile",async(req,resp)=>{
+  let category = req.body.category;
+  let userId = req.body.userId;
+  let result=  await Service.updateOne(
+    {category:category,userId:userId},{$set:req.body}
+)
+console.group(result);
+if(result.matchedCount==1){
+  resp.send({ result: "Result successfully Updated" });
+}
+})
+
+app.delete("/Delete",async(req,resp)=>{
+  let category = req.query.category;
+  let userId = req.query.userId;
+  
+  let data=  await Service.deleteOne({category:category,userId:userId})
+  console.log(data)
+  resp.send("Successfully Deleted")
+})
+
 
 app.listen(4500);

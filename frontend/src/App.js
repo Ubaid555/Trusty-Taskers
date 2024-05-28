@@ -18,6 +18,7 @@ import { Profile } from './Components/Profile/Profile';
 import { ForgotPassword } from './Components/Forgot Password/ForgotPassword';
 import AllUsers from './Components/All Users/AllUsers';
 import AddServices from './Components/Add Services/AddServices';
+import UpdateProfile from './Components/Update Profile/UpdateProfile';
 //import { Logout } from './Components/Logout component/Logout';
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
             <Route path='/profile' element={<Profile/>}/>
             <Route path='/addservice' element={<AddServices/>}/>
             <Route path='/allusers' element={<AllUsers/>}/>
+            <Route path="/updateprofile" element={<UpdateProfile/>} />
            </Route>
 
             <Route path='/' exact element={<Herosec/>}/>

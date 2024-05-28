@@ -1,40 +1,3 @@
-// import React from "react";
-// import { useState, useEffect } from "react";
-// import { NavLink, useLocation } from "react-router-dom";
-// import Navbar from "../Navbar/Navbar";
-// import Footer from "../Footer/Footer";
-// import styles from "./AllUsers.module.css";
-
-// const AllUsers = () => {
-//   const [services, setServices] = useState([]);
-//   const [userId,setUserId]=useState("");
-//   const location = useLocation();
-
-//   useEffect(() => {
-//     getServices();
-//   });
-
-//   const getServices = async () => {
-//     const getId = JSON.parse(localStorage.getItem("loginusers"))
-//     if (getId) {
-//       setUserId(getId._id);
-//     }
-//     try {
-//       const queryParams = new URLSearchParams(location.search);
-//       const category = queryParams.get('category');
-//       let result = await fetch(`http://localhost:4500/services?(category=${category} && userId=${userId}`);
-//       result = await result.json();
-//       if (Array.isArray(result)) {
-//           setServices(result);
-//           console.log("Services", result);
-//       } else {
-//           setServices([]);
-//       }
-//     } catch (error) {
-//       console.error("Error fetching products:", error);
-//     }
-//   };
-
 import React from "react";
 import { useState, useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
@@ -54,11 +17,12 @@ const AllUsers = () => {
       setUserId(storedUser._id);
     }
   }, []);
+
   useEffect(() => {
     if (userId !== null) {
       getServices();
     }
-  }, [location, userId]);
+  });
 
   const getServices = async () => {
     try {
@@ -75,7 +39,7 @@ const AllUsers = () => {
       result = await result.json();
       if (Array.isArray(result)) {
           setServices(result);
-          console.log("Services", result);
+          //console.log("Services", result);
       } else {
           setServices([]);
       }
@@ -84,12 +48,32 @@ const AllUsers = () => {
     }
   };
 
+  
+
+//   const searchHandle = async (event) =>{
+//     console.warn(event.target.value);
+//     let key = event.target.value;
+//     if(key){
+//         let result = await fetch(`http://localhost:4500/search/${key}`);
+//         result = await result.json();
+//         if(result){
+//             setServices(result);
+//         }
+//     }
+//     else{
+//         getServices();
+//     }
+// };
   return (
     <>
     <Navbar/>
     
     <div className={styles["service-list-container"]}>
       <h3 className={styles.heading_style}>List of Service Providers</h3>
+      
+      {/* <input className='search-input' type='text' placeholder='Search Product'
+        onChange={searchHandle}/> */}
+
       <div className={styles.cards}>
         {services.length > 0 ? (
           services.map((service) => (
