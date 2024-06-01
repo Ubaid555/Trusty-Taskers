@@ -79,7 +79,7 @@ const AllUsers = () => {
           services.map((service) => (
             <div key={service._id} className={styles.card}>
               <img
-                src="Images/profile-img.jpg"
+                src={service.image}
                 alt="service-img"
                 className={styles.card_img}
               />

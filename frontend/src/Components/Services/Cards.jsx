@@ -11,9 +11,7 @@ function Card(props){
           <div className='card_info'>
               <span className='card_category'>{props.title}</span>
               <h3 className='card_title'>{props.sname}</h3>
-              {/* <NavLink to='/AllUsers'>
-                <button className='card_btn'>View More</button>
-              </NavLink> */}
+        
               <NavLink to={`/allusers?category=${props.sname}`}>
                 <button className='card_btn'>View More</button>
               </NavLink>

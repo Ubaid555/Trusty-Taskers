@@ -193,6 +193,7 @@ const AddServices = () => {
   const [category, setCategory] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
+  const [image, setImage] = useState("");
 
   useEffect(() => {
     document.title = "Trusty Taskers - Add Services";
@@ -205,6 +206,7 @@ const AddServices = () => {
       setUserId(userData._id);
       setName(userData.name);
       setPhone(userData.phone);
+      setImage(userData.image);
     }
   }, []);
 
@@ -276,7 +278,7 @@ const AddServices = () => {
  
     let result = await fetch("http://localhost:4500/services", {
       method: "post",
-      body: JSON.stringify({ name, phone, category, price, description,userId}),
+      body: JSON.stringify({ name, phone, category, price, description, userId, image}),
       headers: { "Content-Type": "application/json" },
     });
 

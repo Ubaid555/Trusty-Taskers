@@ -15,6 +15,9 @@
   flex-direction: row;
   gap: 80px;
 }
+form{
+  width: 100%;
+}
 .contact_form {
   display: flex;
   flex-direction: column;
@@ -34,6 +37,7 @@
 }
 .form_control input {
   height: 40px;
+  width: 100%;
   padding: 0 8px;
 }
 .form_control textarea {

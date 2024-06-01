@@ -42,9 +42,9 @@ function App() {
             <Route path="/updateprofile" element={<UpdateProfile/>} />
            </Route>
 
+            <Route path='*' element={<NotFound />} />
             <Route path='/' exact element={<Herosec/>}/>
             <Route path='/about' element={<AboutUs/>}/>
-            <Route path='*' element={<NotFound />} />
             <Route path='/login' element={<Login/>}/>
             <Route path='/signup' element={<Signup/>}/>
             <Route path='/forgotpassword' element={<ForgotPassword/>}/>

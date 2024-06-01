@@ -6,7 +6,8 @@ const serviceSchema = new mongoose.Schema({
     category:String,
     price:Number,
     description:String,
-    userId:String
+    userId:String,
+    image:String
 });
 
 module.exports = mongoose.model("services", serviceSchema);

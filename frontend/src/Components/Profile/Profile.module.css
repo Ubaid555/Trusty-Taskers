@@ -97,15 +97,20 @@
   background-color: #c71a24;
 }
 
-.noServices {
-  font-size: 18px;
-  color: #888;
+.oops p{
+  font-size: 40px;
+  font-weight: 700;
+  color: #d01c28;
   text-align: center;
-  margin-top: 50px;
+  margin-top: 120px;
+  margin-bottom: 120px;
 }
 
 /* Media Queries for responsive design at width 1024px or less */
 @media (max-width: 1024px) {
+  .main_heading{
+    margin-top: 105px;
+  }
   .card {
     flex-direction: column; /* Stack items vertically */
     align-items: center; /* Center items horizontally */
@@ -131,6 +136,9 @@
 }
 
 @media (max-width: 768px) {
+  .main_heading{
+    margin-top: 105px;
+  }
   .card {
     flex-direction: column; /* Stack items vertically */
     align-items: center; /* Center items horizontally */

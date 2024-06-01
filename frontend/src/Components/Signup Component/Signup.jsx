@@ -199,6 +199,9 @@ import user_icon from '../Assets/person.png';
 import email_icon from '../Assets/email.png';
 import phone_icon from '../Assets/phone.png';
 import password_icon from '../Assets/password.png';
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+//Getting Storage from our own firebase storage
+import { storage } from "../Firebase/firebase";
 
 export const Signup = () => {
     const [name, setName] = useState("");
@@ -206,6 +209,7 @@ export const Signup = () => {
     const [phone, setPhone] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const [image, setImage] = useState(null);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -273,17 +277,24 @@ export const Signup = () => {
         }
 
         try {
+            // Upload image to Firebase Storage
+            const imageRef = ref(storage, `images/${image.name}`);
+            await uploadBytes(imageRef, image);
+            const imageURL = await getDownloadURL(imageRef);
+            console.log(imageURL);
+    
+            // Send registration data along with image URL to the backend
             let response = await fetch('http://localhost:4500/register', {
                 method: 'POST',
-                body: JSON.stringify({ name, email, phone, password, confirmPassword }),
+                body: JSON.stringify({ name, email, phone, password, confirmPassword, image: imageURL }),
                 headers: {
                     'Content-Type': 'application/json'
                 }
             });
-
+    
             let result = await response.json();
             console.log("Result from server:", result);
-
+    
             if (response.status === 400) {
                 toast.error(result.message);
             } else if (result.name) {
@@ -302,8 +313,9 @@ export const Signup = () => {
     }
 
     const handleImageChange = (e) => {
-        // Set the selected image file to the state
-        // setImage(e.target.files[0]);
+        if (e.target.files[0]) {
+            setImage(e.target.files[0]);
+        }
     }
 
     return (
@@ -336,7 +348,7 @@ export const Signup = () => {
                         </div>
 
                         <div className={styles.input}>
-                            <img src={phone_icon} width='30px' height='25px' alt='' className={styles.inputImg} />
+                            <img src={phone_icon} width='21px' height='25px' alt='' className={styles.inputImg} />
                             <input
                                 type='text'
                                 value={phone}
@@ -365,7 +377,7 @@ export const Signup = () => {
                             />
                         </div>
 
-                        <div>
+                        <div className={styles.file}>
                             <input
                                 type='file'
                                 accept='image/*' // Accept only image files

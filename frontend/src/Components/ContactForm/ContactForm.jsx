@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/img-redundant-alt */
 import Button from "../Button/Button";
 import styles from "./Contact.module.css";
 import { MdMessage } from "react-icons/md";
@@ -44,7 +43,7 @@ const ContactForm = () => {
       {/*<div className={styles.s_icons}>
         <a href="https://www.whatsapp.com" icon={<WhatsAppIcon fontSize="24px" />} />
 </div>*/}
-        <form className="form" onSubmit={onSubmit}>
+        <form className={styles.C_form} onSubmit={onSubmit}>
           <div className={styles.form_control}>
             <label htmlFor="name">Name</label>
             <input type="text" name="name" />
@@ -70,7 +69,7 @@ const ContactForm = () => {
         </form>
       </div>
       <div className={styles.contact_image}>
-        <img src="/Images/Service.png" alt="contact image" />
+        <img src="/Images/Service.png" alt="contact-img" />
       </div>
     </section>
     
