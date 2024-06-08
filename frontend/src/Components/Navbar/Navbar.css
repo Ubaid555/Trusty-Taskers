@@ -13,7 +13,7 @@ nav {
     align-items: center;
     justify-content: space-between;
     background: #d01c28;
-    padding: 5px 0%; 
+    padding: 0% 0%; 
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06);
     z-index: 1000;
     position: fixed;
@@ -43,8 +43,7 @@ nav {
     color: white;
 }
 
-.loginbtns,
-.signoutbtns {
+.loginbtns{
     font-size: 1rem;
     font-weight: 600;
     padding: 7px 20px;
@@ -167,6 +166,9 @@ a {
     color: #ffffff;
     align-items: center;
 }
+.profile-menu{
+    margin-bottom: 10px;
+}
 
 @media screen and (max-width: 1100px) {
     .mainbtn{
@@ -178,7 +180,7 @@ a {
     }
     
     nav {
-        padding: 10px 1%; 
+        padding: 0% 1%; 
     }
     #navbar .item {
         text-decoration: none;
@@ -190,13 +192,12 @@ a {
         padding: 0 8px;
         position: relative;
     }
-
 }
 
 @media screen and (max-width: 768px) {
     nav {
-        padding: 10px 12%; 
-        padding-left: 20%;
+        padding: 0.3% 12%; 
+        padding-left: 16%;
     }
 
     .logo {
@@ -218,7 +219,7 @@ a {
         flex-direction: column;
         align-items: flex-start;
         justify-content: flex-start;
-        top: 105.5px;
+        top: 105px;
         right: -450px; 
         width: 220px;
         height: 100vh;
@@ -267,4 +268,27 @@ a {
         font-size: 24px;
         cursor: pointer;
     }
+    .profile-menu{
+        padding-top: 15px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    #navbar {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        top: 104px;
+        right: -450px; 
+        width: 220px;
+        height: 100vh;
+        background: #d01c28;
+        box-shadow: 0 40px 60px rgba(0, 0, 0, 0.5);
+        padding: 40px 0 0 10px;
+        transition: right 0.5s ease-out;
+        position: fixed;
+        z-index: 1000;
+    }
+
 }

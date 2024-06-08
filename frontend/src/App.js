@@ -19,6 +19,7 @@ import { ForgotPassword } from './Components/Forgot Password/ForgotPassword';
 import AllUsers from './Components/All Users/AllUsers';
 import AddServices from './Components/Add Services/AddServices';
 import UpdateProfile from './Components/Update Profile/UpdateProfile';
+import ServiceRequests from './Components/ServiceRequests/ServiceRequests';
 //import { Logout } from './Components/Logout component/Logout';
 
 function App() {
@@ -40,6 +41,7 @@ function App() {
             <Route path='/addservice' element={<AddServices/>}/>
             <Route path='/allusers' element={<AllUsers/>}/>
             <Route path="/updateprofile" element={<UpdateProfile/>} />
+            <Route path="/servicerequests" element={<ServiceRequests/>} />
            </Route>
 
             <Route path='*' element={<NotFound />} />

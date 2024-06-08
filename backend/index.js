@@ -159,7 +159,7 @@ let serviceTakerId=req.body.serviceTakerId;
 const existingUser = await Booking.findOne({category,serviceProviderId,serviceTakerId})
 if (existingUser) {
   return resp.send({
-    result: "You have Already Booked this service with this user with this service",
+    result: "You have Already Booked this service with this user",
   });
 }else{ 
     console.log("Request Body:", req.body);
@@ -174,15 +174,13 @@ if (existingUser) {
   }
 });
 
+//Show Booking's
 app.get("/showBookedService",async(req,resp)=>{
   let currentUser = req.query.userId;
   let result = await Booking.find({serviceProviderId : currentUser});
   if(result){
     resp.send(result)
   }
- 
-
-
 })
 
 

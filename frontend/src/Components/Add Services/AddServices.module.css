@@ -1,7 +1,7 @@
 .book_container {
   display: flex;
   max-width: 1000px;
-  margin-top: 60px;
+  margin-top: 70px;
   margin-left: 200px;
   align-items: flex-end;
   margin-bottom: 65px;
@@ -15,7 +15,7 @@
   color: #000000;
   font-size: 1.5rem;
   margin-bottom: 30px;
-  margin-top: 93px;
+  margin-top: 85px;
   background-color: #fecaca;
 }
 .contact_form {
@@ -180,7 +180,9 @@ width: 100%;
       margin-left: 20px;
       margin-right: 20px;
     }
-    
+    .main_heading{
+      margin-top: 105px;
+    }
 } 
 @media (max-width: 480px) {
   .formLabel {

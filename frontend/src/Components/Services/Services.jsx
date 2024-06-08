@@ -8,13 +8,13 @@ import './Services.css';
 const Services = () => {
   
   useEffect(() => {
-    document.title = "Trusty Taskers - Services";
+    document.title = "Trusty Taskers - View Services";
   }, []);
 
   return (
     <div className="services-container">
       <Navbar />
-      <h1 className='heading_style'>List of top Services</h1>
+      <h1 className='head_style'>List of top Services</h1>
       <div className="cards-container">
         {Sdata.map((val) => (
           <Cards 

@@ -23,7 +23,7 @@ body {
   font-size: 1.5rem;
   margin-bottom: 30px;
   background-color: #fecaca;
-  margin-top: 93px;
+  margin-top: 85px;
 }
 
 .cards {
@@ -107,12 +107,14 @@ body {
   text-decoration: none;
 }
 
+
 .no_services{
-  font-size: 64px;
+  font-size: 40px;
   font-weight: 700;
   color: #d01c28;
-  margin-top: 120px;
-  margin-bottom: 120px;
+  text-align: center;
+  margin-top: 210px;
+  margin-bottom: 260px;
 }
 
 @media (max-width: 768px) {
@@ -120,6 +122,7 @@ body {
     padding: 20px 0;
     font-size: 1.2rem;
     margin-bottom: 15px;
+    margin-top: 105px;
   }
   .card {
     width: 80%;
