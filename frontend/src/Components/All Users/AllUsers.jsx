@@ -158,10 +158,15 @@ const AllUsers = () => {
 
   const handleBookNow = (service) => {
     navigate("/bookingform", {
-      state: { category: service.category, serviceProviderId: service.userId },
+      state: {
+        category: service.category,
+        serviceProviderName: service.name,
+        serviceProviderId: service.userId,
+        serviceProviderPhone: service.phone,
+        serviceProviderImage: service.image,
+      },
     });
   };
-
   return (
     <>
       <Navbar />

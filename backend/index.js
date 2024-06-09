@@ -149,39 +149,83 @@ app.delete("/Delete",async(req,resp)=>{
   resp.send("Successfully Deleted")
 })
 
-//Book Service
+//Book a new Service
+// app.post("/bookService", async (req, resp) => {
+//   try {
+// let category=req.body.category;
+// let serviceProviderId=req.body.serviceProviderId;
+// let serviceTakerId=req.body.serviceTakerId;
+
+// const existingUser = await Booking.findOne({category,serviceProviderId,serviceTakerId})
+// if (existingUser) {
+//   return resp.send({
+//     result: "You have Already Booked this service with this user",
+//   });
+// }else{ 
+//   let bookingData = {...req.body,currentStatus:"Pending"}
+//     console.log("Request Body:", req.body);
+//     let booking = new Booking(bookingData);
+//     let result = await booking.save();
+//     console.log("Saved Booking:", result);
+//     resp.send(result);
+// }
+//   } catch (error) {
+//     console.error("Error saving booking:", error);
+//     resp.status(500).send({ error: "Internal Server Error" });
+//   }
+// });
+
 app.post("/bookService", async (req, resp) => {
   try {
-let category=req.body.category;
-let serviceProviderId=req.body.serviceProviderId;
-let serviceTakerId=req.body.serviceTakerId;
+    let category = req.body.category;
+    let serviceProviderId = req.body.serviceProviderId;
+    let serviceTakerId = req.body.serviceTakerId;
 
-const existingUser = await Booking.findOne({category,serviceProviderId,serviceTakerId})
-if (existingUser) {
-  return resp.send({
-    result: "You have Already Booked this service with this user",
-  });
-}else{ 
-    console.log("Request Body:", req.body);
-    let booking = new Booking(req.body);
-    let result = await booking.save();
-    console.log("Saved Booking:", result);
-    resp.send(result);
-}
+    // Log the received request body to debug missing fields
+    console.log("Received Request Body:", req.body);
+
+    const existingUser = await Booking.findOne({ category, serviceProviderId, serviceTakerId });
+    if (existingUser) {
+      return resp.send({
+        result: "You have Already Booked this service with this user",
+      });
+    } else {
+      let bookingData = { ...req.body, currentStatus: "Pending" };
+      let booking = new Booking(bookingData);
+      let result = await booking.save();
+      resp.send(result);
+    }
   } catch (error) {
     console.error("Error saving booking:", error);
     resp.status(500).send({ error: "Internal Server Error" });
   }
 });
 
+
 //Show Booking's
-app.get("/showBookedService",async(req,resp)=>{
+app.get("/showBookedService", async (req, res) => {
   let currentUser = req.query.userId;
-  let result = await Booking.find({serviceProviderId : currentUser});
-  if(result){
-    resp.send(result)
+  try {
+      let result = await Booking.find({ serviceTakerId: currentUser }); // or serviceProviderId: currentUser
+      if (result) {
+          res.send(result);
+      } else {
+          res.status(404).send({ message: "No bookings found" });
+      }
+  } catch (error) {
+      res.status(500).send({ message: "Error fetching bookings" });
   }
-})
+});
+
+
+// //show all Booking's
+// app.get("/showBookedService",async(req,resp)=>{
+//   let currentUser = req.query.userId;
+//   let result = await Booking.find({serviceProviderId : currentUser});
+//   if(result){
+//     resp.send(result)
+//   }
+// })
 
 
 app.listen(4500);

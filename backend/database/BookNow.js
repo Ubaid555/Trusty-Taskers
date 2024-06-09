@@ -1,14 +1,18 @@
 const mongoose = require('mongoose');
 
 const bookingSchema = new mongoose.Schema({
-  name: String,
-  phone: Number,
-  category: String,
-  address:String,
-  description: String,
   serviceTakerId: String,
-  serviceProviderId:String,
-  image: String
+  serviceTakerName: String,
+  serviceTakerPhone: Number,
+  serviceTakerImage: String,
+  serviceProviderId: String,
+  serviceProviderName: String,
+  serviceProviderPhone: Number,
+  serviceProviderImage: String,
+  category: String,
+  address: String,
+  description: String,
+  currentStatus: String
 });
 
-module.exports = mongoose.model("bookings", bookingSchema);
+module.exports = mongoose.model("Booking", bookingSchema);

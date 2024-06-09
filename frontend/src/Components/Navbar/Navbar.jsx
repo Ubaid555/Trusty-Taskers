@@ -1,7 +1,6 @@
 
 
 
-
 // import React, { useState } from 'react';
 // import { Link, NavLink, useNavigate } from 'react-router-dom';
 // import Dropdown from 'react-bootstrap/Dropdown';
@@ -130,6 +129,7 @@ const Navbar = () => {
                         <NavLink className="item activeStyle" to='/'>Home</NavLink>
                         <NavLink className="item activeStyle" to="/about">About</NavLink>
                         <NavLink className="item activeStyle" to="/contact">Contact Us</NavLink>
+                        <NavLink className="item activeStyle" to='/dashboard'>Dashboard</NavLink>
 
                         <Dropdown className="dropbtn" variant="link">
                             <Dropdown.Toggle
@@ -145,7 +145,22 @@ const Navbar = () => {
                             </Dropdown.Menu>
                         </Dropdown>
 
-                        <NavLink className="item activeStyle" to='/servicerequests'>Requests</NavLink>
+                        <Dropdown className="dropbtn" variant="link">
+                            <Dropdown.Toggle
+                                className="mainbtn"
+                                style={{ backgroundColor: '#d01c28', color: 'white', border: 'none' }}
+                            >
+                                Profile
+                            </Dropdown.Toggle>
+
+                            <Dropdown.Menu className="dropdown-menu-custom">
+                                <NavLink to='/profile'><Dropdown.Item href="#/action-1">View Profile</Dropdown.Item></NavLink>
+                                <NavLink to="/myservices"><Dropdown.Item href="#/action-2">My Services</Dropdown.Item></NavLink>
+                                <NavLink to="/mybookings"><Dropdown.Item href="#/action-2">My Bookings</Dropdown.Item></NavLink>
+                            </Dropdown.Menu>
+                        </Dropdown>
+
+                        {/* <NavLink className="item activeStyle" to='/servicerequests'>Requests</NavLink> */}
 
                     </ul>
                     {auth ? (

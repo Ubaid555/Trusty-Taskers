@@ -14,12 +14,15 @@ import PaymentConfirmation from './Components/Confirmation Page/PaymentConfirmat
 import Partnerships from './Components/Partnerships/Partnerships';
 import BookingForm from './Components/Booking Form/BookingForm';
 import { PrivateComponent } from './Components/Private Component/PrivateComponent';
-import { Profile } from './Components/Profile/Profile';
+import { MyServices } from './Components/MyServices/MyServices';
 import { ForgotPassword } from './Components/Forgot Password/ForgotPassword';
 import AllUsers from './Components/All Users/AllUsers';
 import AddServices from './Components/Add Services/AddServices';
 import UpdateProfile from './Components/Update Profile/UpdateProfile';
+
 import ServiceRequests from './Components/ServiceRequests/ServiceRequests';
+import MyBookings from './Components/MyBookings/MyBookings';
+import Dashboard from './Components/Dashboard/Dashboard';
 //import { Logout } from './Components/Logout component/Logout';
 
 function App() {
@@ -37,11 +40,13 @@ function App() {
             <Route path='/confirmation' element={<PaymentConfirmation/>}/>
             <Route path='/bookingform' element={<BookingForm/>}/>
             <Route path='/partnerships' element={<Partnerships/>}/>
-            <Route path='/profile' element={<Profile/>}/>
+            <Route path='/myservices' element={<MyServices/>}/>
             <Route path='/addservice' element={<AddServices/>}/>
             <Route path='/allusers' element={<AllUsers/>}/>
             <Route path="/updateprofile" element={<UpdateProfile/>} />
             <Route path="/servicerequests" element={<ServiceRequests/>} />
+            <Route path="/mybookings" element={<MyBookings/>} />
+            <Route path="/dashboard" element={<Dashboard/>} />
            </Route>
 
             <Route path='*' element={<NotFound />} />
