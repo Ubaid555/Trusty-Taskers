@@ -23,6 +23,8 @@ import UpdateProfile from './Components/Update Profile/UpdateProfile';
 import ServiceRequests from './Components/ServiceRequests/ServiceRequests';
 import MyBookings from './Components/MyBookings/MyBookings';
 import Dashboard from './Components/Dashboard/Dashboard';
+import ManageRequests from './Components/ManageRequests/ManageRequests';
+import ConfirmedBookings from './Components/ConfirmedBookings/ConfirmedBookings';
 //import { Logout } from './Components/Logout component/Logout';
 
 function App() {
@@ -46,6 +48,8 @@ function App() {
             <Route path="/updateprofile" element={<UpdateProfile/>} />
             <Route path="/servicerequests" element={<ServiceRequests/>} />
             <Route path="/mybookings" element={<MyBookings/>} />
+            <Route path="/managerequests" element={<ManageRequests/>} />
+            <Route path="/confirmedbookings" element={<ConfirmedBookings/>} />
             <Route path="/dashboard" element={<Dashboard/>} />
            </Route>
 

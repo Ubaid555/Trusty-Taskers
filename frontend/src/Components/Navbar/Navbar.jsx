@@ -157,6 +157,8 @@ const Navbar = () => {
                                 <NavLink to='/profile'><Dropdown.Item href="#/action-1">View Profile</Dropdown.Item></NavLink>
                                 <NavLink to="/myservices"><Dropdown.Item href="#/action-2">My Services</Dropdown.Item></NavLink>
                                 <NavLink to="/mybookings"><Dropdown.Item href="#/action-2">My Bookings</Dropdown.Item></NavLink>
+                                <NavLink to="/confirmedbookings"><Dropdown.Item href="#/action-2">Confirmed Bookings</Dropdown.Item></NavLink>
+                                <NavLink to="/managerequests"><Dropdown.Item href="#/action-2">Manage Requests</Dropdown.Item></NavLink>
                             </Dropdown.Menu>
                         </Dropdown>
 

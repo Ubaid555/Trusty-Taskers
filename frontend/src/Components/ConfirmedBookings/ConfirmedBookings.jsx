@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import styles from './MyBookings.module.css';
+import styles from './ConfirmedBookings.module.css';
 import Navbar from '../Navbar/Navbar';
 
-const MyBookings = () => {
+const ConfirmedBookings = () => {
     const user = JSON.parse(localStorage.getItem("loginusers"));
     const userName = user ? user.name : "User";
 
@@ -19,7 +19,7 @@ const MyBookings = () => {
     useEffect(() => {
         const fetchBookings = async () => {
             try {
-                let response = await fetch(`http://localhost:4500/viewBookingDetails?userId=${userId}`, {
+                let response = await fetch(`http://localhost:4500/showBookingRequestsConfirmed?userId=${userId}`, {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json"
@@ -37,16 +37,42 @@ const MyBookings = () => {
         }
     }, [userId]);
 
-    return (
+    const handleConfirmedRequest = async (bookingId) => {
+        if (bookingId) {
+            try {
+                let update = await fetch(`http://localhost:4500/handleBookingRequest?bookingId=${bookingId}`, {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                     body: JSON.stringify({ status: 'Completed' })
+                });
+    
+                if (!update.ok) {
+                    throw new Error('Network response was not ok');
+                }
+    
+                let result = await update.json();
+                if(result.modifiedCount===1){
+                    window.location.reload();
+                }
+                console.log("Update result:", result);
+            } catch (error) {
+                console.error("Error updating booking status:", error);
+            }
+        }
+    };
+
+   return (
       <>
       <Navbar/>
-        <h1 className={styles.main_heading}>{userName}'s BOOKINGS</h1>
+        <h1 className={styles.main_heading}>{userName}'s Services To Be Fulfilled</h1>
         <div className={styles.bookingsContainer}>
             <table className={styles.bookingsTable}>
                 <thead>
                     <tr className={styles.tableRow}>
                         <th className={styles.tableHeader}>Service Name</th>
-                        <th className={styles.tableHeader}>Provider Name</th>
+                        <th className={styles.tableHeader}>Requester Name</th>
                         <th className={styles.tableHeader}>Status</th>
                         <th className={styles.tableHeader}>Actions</th>
                     </tr>
@@ -56,12 +82,12 @@ const MyBookings = () => {
                         bookings.map((booking) => (
                             <tr key={booking._id} className={styles.tableRow}>
                                 <td className={styles.tableCell}>{booking.category}</td>
-                                <td className={styles.tableCell}>{booking.serviceProviderName}</td>
+                                <td className={styles.tableCell}>{booking.serviceTakerName}</td>
                                 <td className={styles.tableCell}>{booking.currentStatus}</td>
                                 <td className={styles.tableCell}>
-                                    <button className={styles.actionButton}>View Details</button>
-                                    <button className={styles.actionButton}>Reschedule</button>
-                                    <button className={styles.actionButton}>Cancel</button>
+                                <button className={styles.actionButton}>View Details</button>
+                                    <button className={styles.actionButton} onClick={() => handleConfirmedRequest(booking._id)}>Confirmed</button>
+                                    <button className={styles.actionButton}>Reject</button>
                                 </td>
                             </tr>
                         ))
@@ -77,4 +103,4 @@ const MyBookings = () => {
     );
 };
 
-export default MyBookings;
+export default ConfirmedBookings

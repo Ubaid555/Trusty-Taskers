@@ -180,10 +180,7 @@ app.post("/bookService", async (req, resp) => {
     let category = req.body.category;
     let serviceProviderId = req.body.serviceProviderId;
     let serviceTakerId = req.body.serviceTakerId;
-
-    // Log the received request body to debug missing fields
-    console.log("Received Request Body:", req.body);
-
+    
     const existingUser = await Booking.findOne({ category, serviceProviderId, serviceTakerId });
     if (existingUser) {
       return resp.send({
@@ -203,7 +200,7 @@ app.post("/bookService", async (req, resp) => {
 
 
 //Show Booking's
-app.get("/showBookedService", async (req, res) => {
+app.get("/viewBookingDetails", async (req, res) => {
   let currentUser = req.query.userId;
   try {
       let result = await Booking.find({ serviceTakerId: currentUser }); // or serviceProviderId: currentUser
@@ -218,14 +215,36 @@ app.get("/showBookedService", async (req, res) => {
 });
 
 
-// //show all Booking's
-// app.get("/showBookedService",async(req,resp)=>{
-//   let currentUser = req.query.userId;
-//   let result = await Booking.find({serviceProviderId : currentUser});
-//   if(result){
-//     resp.send(result)
-//   }
-// })
+//show all Booking's that are pending to Service Provider 
+app.get("/showBookingRequests",async(req,resp)=>{
+  let currentUser = req.query.userId;
+  let result = await Booking.find({serviceProviderId : currentUser,currentStatus : "Pending"});
+  if(result){
+    resp.send(result)
+  }
+})
+
+//show all Booking's that are ongoing
+app.get("/showBookingRequestsConfirmed",async(req,resp)=>{
+  let currentUser = req.query.userId;
+  let result = await Booking.find({serviceProviderId : currentUser,currentStatus : "Confirmed"});
+  if(result){
+    resp.send(result)
+  }
+})
+
+//Handling Accepting Request By Service Provider
+app.put("/handleBookingRequest", async (req, resp) => {
+  try {
+    let bookingId = req.query.bookingId;
+    let currentStatus=req.body.status;
+    let result = await Booking.updateOne({ _id: bookingId }, { $set: { currentStatus: currentStatus} });
+    resp.send(result);
+  } catch (error) {
+    console.error("Error handling accepting request:", error);
+    resp.status(500).send({ error: "Internal Server Error" });
+  }
+});
 
 
 app.listen(4500);
