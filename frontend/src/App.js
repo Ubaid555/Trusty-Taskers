@@ -18,11 +18,11 @@ import { MyServices } from './Components/MyServices/MyServices';
 import { ForgotPassword } from './Components/Forgot Password/ForgotPassword';
 import AllUsers from './Components/All Users/AllUsers';
 import AddServices from './Components/Add Services/AddServices';
-import UpdateProfile from './Components/Update Profile/UpdateProfile';
-
+import UpdateProfile from './Components/Update Service/UpdateService';
 import ServiceRequests from './Components/ServiceRequests/ServiceRequests';
 import MyBookings from './Components/MyBookings/MyBookings';
 import Dashboard from './Components/Dashboard/Dashboard';
+import ViewProfile from './Components/ViewProfile/ViewProfile';
 import ManageRequests from './Components/ManageRequests/ManageRequests';
 import ConfirmedBookings from './Components/ConfirmedBookings/ConfirmedBookings';
 //import { Logout } from './Components/Logout component/Logout';
@@ -48,9 +48,10 @@ function App() {
             <Route path="/updateprofile" element={<UpdateProfile/>} />
             <Route path="/servicerequests" element={<ServiceRequests/>} />
             <Route path="/mybookings" element={<MyBookings/>} />
+            <Route path="/dashboard" element={<Dashboard/>} />
+            <Route path="/profile" element={<ViewProfile/>} />
             <Route path="/managerequests" element={<ManageRequests/>} />
             <Route path="/confirmedbookings" element={<ConfirmedBookings/>} />
-            <Route path="/dashboard" element={<Dashboard/>} />
            </Route>
 
             <Route path='*' element={<NotFound />} />

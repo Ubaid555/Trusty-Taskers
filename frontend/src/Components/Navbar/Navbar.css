@@ -111,10 +111,10 @@ a {
     left: 20px;
 }
 
-.dropbtn{
+/* .dropbtn{
     background-color: #d01c28;
     
-}
+} */
 
 .mainbtn{
     background-color: #d01c28;
@@ -123,6 +123,12 @@ a {
     font-weight: 500;
     padding-top: 15px;
 }
+
+/* .profile-dropdown{
+    background-color: #d01c28;
+    color: white;
+    border: none;
+} */
 
 .mainbtn:hover{
     background-color: #d01c28;
@@ -134,30 +140,39 @@ a {
 
 .dropdown-menu-custom a {
     color: white;
-    font-size: 1rem;
+    font-size: 0.9rem;
     font-weight: 500;
     text-decoration: none;
     background-color: #d01c28;
 }
 
-.dropdown-menu-custom a:hover {
+/* .dropdown-menu-custom a:hover {
     color: #f79aa0;
     background-color: #d01c28;
-}
+} */
 
-.mainbtn:hover,
+/* .mainbtn:hover,
 .mainbtn:focus,
 .dropdown-menu-custom:hover .mainbtn,
 .mainbtn.show {
     background-color: #d01c28;
     color: white;
     border: none;
-}
+} */
 
 .mainbtn.show::after {
     background-color: #d01c28;
 }
+.dropdown-menu-custom .dropdown-item {
+    background-color: #d01c28;
+    color: white;
+    border: none;
+    transition: color 0.3s ease;
+}
 
+.dropdown-menu-custom .dropdown-item:hover {
+    color: #f79aa0;
+}
 #mobile {
     display: none;
 }
@@ -271,6 +286,7 @@ a {
     .profile-menu{
         padding-top: 15px;
     }
+    
 }
 
 @media screen and (max-width: 400px) {

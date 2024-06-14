@@ -1,382 +1,3 @@
-// // // import {React, useEffect} from 'react';
-// // // import Navbar from '../Navbar/Navbar';
-// // // import Footer from '../Footer/Footer';
-// // // import styles from './BookingForm.module.css';
-
-// // // const BookingForm = () => {
-// // //   useEffect(() => {
-// // //     document.title = "Trusty Taskers - Book Service";
-// // //   }, []);
-
-// // //   return (
-// // //     <>
-// // //     <Navbar/>
-// // //     <h1 className={styles.main_heading}>Book your service here</h1>
-// // //     <section className={styles.book_container}>
-// // //       <div className={styles.contact_form}>
-// // //         <form className="form">
-// // //           <div className={styles.form_control}>
-// // //             <label htmlFor="phone">Phone number</label>
-// // //             <input type="tel" name="phone" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"/>
-// // //           </div>
-
-// // //           <div className={styles.form_control}>
-// // //             <label htmlFor="address">Address</label>
-// // //             <input type="text" name="address" />
-// // //           </div>
-
-// // //           <div className={styles.form_control}>
-// // //             <label htmlFor="text">Enter your problem here</label>
-// // //             <textarea name="text" rows="5" />
-// // //           </div>
-
-// // //           <div
-// // //             style={{
-// // //               display: "flex",
-// // //               justifyContent: "center",
-// // //               marginBottom: "20px",
-// // //             }}
-// // //           >
-// // //             <button className={styles.bookbtn} type="submit">Book Service</button>
-// // //           </div>
-
-// // //           {/*<div>{name + " " + email + " " + text}</div>*/}
-// // //         </form>
-// // //       </div>
-// // //       <div className={styles.contact_image}>
-// // //         <img src="/Images/booking provider.png" alt="Booking" />
-// // //       </div>
-// // //     </section>
-// // //     <Footer/>
-// // //     </>
-// // //   );
-// // // };
-
-// // // export default  BookingForm;
-
-// // import React from 'react';
-// // import { useState,useEffect } from "react";
-// // import { useLocation } from "react-router-dom";
-// // import { ToastContainer, toast } from "react-toastify";
-// // import 'react-toastify/dist/ReactToastify.css';
-// // import Navbar from '../Navbar/Navbar';
-// // import Footer from '../Footer/Footer';
-// // import styles from './BookingForm.module.css';
-
-// // const BookingForm = () => {
-
-// //   const [serviceTakerId,setServiceTakerId]= useState("");
-// //   const [name, setName] = useState("");
-// //   const [phone, setPhone] = useState("");
-// //   const [address, setAddress] = useState("");
-// //   const [description, setDescription] = useState("");
-// //   const [image, setImage] = useState("");
-// //   const location = useLocation();
-// //   const { category,serviceProviderId } = location.state || {};
-
-// //   useEffect(() => {
-// //     const userData = JSON.parse(localStorage.getItem("loginusers"));
-// //     if (userData) {
-
-// //       setServiceTakerId(userData._id);
-// //       setName(userData.name);
-// //       setPhone(userData.phone);
-// //       setImage(userData.image);
-// //     }
-// //   }, []);
-
-// //   const handleBookService= async() =>{
-// //     let result = await fetch ("http://localhost:4500/bookService",{
-// //       method: "post",
-// //       body: JSON.stringify({ name, phone, category, address,description, serviceTakerId,serviceProviderId, image}),
-// //       headers: { "Content-Type": "application/json" },
-// //     })
-// //     result=await result.json();
-// //       if (result.result === 'You have Already Booked this service with this user') {
-// //         console.log(result.result);
-// //         toast.error(result.result);
-// //       } else {
-// //         toast.success("Service has been requested successfully!");
-// //       }
-// //   }
-
-// //   return (
-// //     <>
-// //     <Navbar/>
-// //     <h1 className={styles.main_heading}>Book your service here</h1>
-// //     <section className={styles.book_container}>
-// //       <div className={styles.contact_form}>
-// //         <form className="form">
-// //           <div className={styles.form_control}>
-// //             <label htmlFor="name">Name</label>
-// //             <input type="text" name="name" value = {JSON.parse(localStorage.getItem("loginusers")).name} readOnly />
-// //           </div>
-
-// //           <div className={styles.form_control}>
-// //             <label htmlFor="category">Category</label>
-// //             <input type="text" id="category" name="category" value={category} readOnly />
-// //           </div>
-
-// //           <div className={styles.form_control}>
-// //             <label htmlFor="phone">Phone number</label>
-// //             <input type="tel" name="phone" pattern="[0-9]{2}-[0-9]{2}-[0-9]{3}" value={phone}/>
-// //           </div>
-
-// //           <div className={styles.form_control}>
-// //             <label htmlFor="address">Address</label>
-// //             <input type="text" name="address"
-// //                   onChange={(e) => setAddress(e.target.value)}/>
-// //           </div>
-
-// //           <div className={styles.form_control}>
-// //             <label htmlFor="text">Enter your problem here</label>
-// //             <textarea name="text" rows="5"
-// //                   onChange={(e) => setDescription(e.target.value)}/>
-// //           </div>
-
-// //           <div
-// //             style={{
-// //               display: "flex",
-// //               justifyContent: "center",
-// //               marginBottom: "20px",
-// //             }}
-// //           >
-// //             <button onClick={handleBookService} className={styles.bookbtn} type="submit">Book Service</button>
-// //           </div>
-
-// //           {/*<div>{name + " " + email + " " + text}</div>*/}
-// //         </form>
-// //       </div>
-// //       <div className={styles.contact_image}>
-// //         <img src="/Images/booking provider.png" alt="Booking" />
-// //       </div>
-// //     </section>
-// //     <Footer/>
-// //     </>
-// //   );
-// // };
-
-// // export default  BookingForm;
-
-// import React, { useState, useEffect } from "react";
-// import { useLocation, useNavigate } from "react-router-dom";
-// import { ToastContainer, toast } from "react-toastify";
-// import "react-toastify/dist/ReactToastify.css";
-// import Navbar from "../Navbar/Navbar";
-// import Footer from "../Footer/Footer";
-// import styles from "./BookingForm.module.css";
-
-// const BookingForm = () => {
-//   const [serviceTakerId, setServiceTakerId] = useState("");
-//   const [serviceTakerName, setServiceTakerName] = useState("");
-//   const [serviceTakerPhone, setServiceTakerPhone] = useState("");
-//   const [serviceTakerImage, setServiceTakerImage] = useState("");
-
-//   const [address, setAddress] = useState("");
-//   const [description, setDescription] = useState("");
-//   const location = useLocation();
-//   const navigate = useNavigate();
-//   const {
-//     category,
-//     serviceProviderId,
-//     serviceProviderName,
-//     serviceProviderPhone,
-//     serviceProviderImage,
-//   } = location.state || {};
-
-//   useEffect(() => {
-//     const userData = JSON.parse(localStorage.getItem("loginusers"));
-//     if (userData) {
-//       setServiceTakerId(userData._id);
-//       setServiceTakerName(userData.name);
-//       setServiceTakerPhone(userData.phone);
-//       setServiceTakerImage(userData.image);
-//     }
-//   }, []);
-
-//   const handleBookService = async (e) => {
-//     e.preventDefault(); // Prevent the default form submission behavior
-
-//     try {
-//       let response = await fetch("http://localhost:4500/bookService", {
-//         method: "POST",
-//         body: JSON.stringify({
-//           serviceTakerId,
-//           serviceTakerName,
-//           serviceTakerPhone,
-//           serviceTakerImage,
-
-//           serviceProviderId,
-//           serviceProviderName,
-//           serviceProviderPhone,
-//           serviceProviderImage,
-
-//           category,
-//           address,
-//           description,
-//         }),
-//         headers: { "Content-Type": "application/json" },
-//       });
-
-//       if (!response.ok) {
-//         throw new Error(`HTTP error! status: ${response.status}`);
-//       }
-
-//       let result = await response.json();
-
-//       if (
-//         result.result === "You have Already Booked this service with this user"
-//       ) {
-//         toast.error(result.result);
-//       } else {
-//         toast.success("Service has been requested successfully!");
-//         navigate("/services");
-//         toast.success("Service has been requested successfully!");
-//       }
-//     } catch (error) {
-//       console.error("Error occurred during fetch:", error);
-//       toast.error("An error occurred while requesting the service.");
-//     }
-//   };
-
-//   return (
-//     <>
-//       <Navbar />
-//       <h1 className={styles.main_heading}>Book your service here</h1>
-//       <section className={styles.book_container}>
-//         <div className={styles.contact_form}>
-//           <form className="form" onSubmit={handleBookService}>
-//             <div className={styles.form_control}>
-//               <label htmlFor="name">Name</label>
-//               <input
-//                 type="text"
-//                 name="name"
-//                 value={serviceTakerName}
-//                 readOnly
-//               />
-//             </div>
-
-//             <div className={styles.form_control}>
-//               <label htmlFor="category">Category</label>
-//               <input
-//                 type="text"
-//                 id="category"
-//                 name="category"
-//                 value={category}
-//                 readOnly
-//               />
-//             </div>
-
-//             <div className={styles.form_control}>
-//               <label htmlFor="phone">Phone number</label>
-//               <input
-//                 type="tel"
-//                 name="phone"
-//                 pattern="{3}-[0-9]{2}-[0-9]{3}"
-//                 value={serviceProviderPhone}
-//               />
-//             </div>
-
-//             <div className={styles.form_control}>
-//               <label htmlFor="address">Address</label>
-//               <input
-//                 type="text"
-//                 name="address"
-//                 onChange={(e) => setAddress(e.target.value)}
-//               />
-//             </div>
-
-//             <div className={styles.form_control}>
-//               <label htmlFor="text">Enter your problem here</label>
-//               <textarea
-//                 name="text"
-//                 rows="5"
-//                 onChange={(e) => setDescription(e.target.value)}
-//               />
-//             </div>
-
-//             <div
-//               style={{
-//                 display: "flex",
-//                 justifyContent: "center",
-//                 marginBottom: "20px",
-//               }}
-//             >
-//               <button className={styles.bookbtn} type="submit">
-//                 Book Service
-//               </button>
-//             </div>
-//           </form>
-//         </div>
-//         <div className={styles.contact_image}>
-//           <img src="/Images/booking provider.png" alt="Booking" />
-//         </div>
-//       </section>
-//       <Footer />
-//       <ToastContainer />
-//     </>
-//   );
-// };
-
-// export default BookingForm;
-
-// import {React, useEffect} from 'react';
-// import Navbar from '../Navbar/Navbar';
-// import Footer from '../Footer/Footer';
-// import styles from './BookingForm.module.css';
-
-
-// const BookingForm = () => {
-//   useEffect(() => {
-//     document.title = "Trusty Taskers - Book Service";
-//   }, []);
-
-//   return (
-//     <>
-//     <Navbar/>
-//     <h1 className={styles.main_heading}>Book your service here</h1>
-//     <section className={styles.book_container}>
-//       <div className={styles.contact_form}>
-//         <form className="form">
-//           <div className={styles.form_control}>
-//             <label htmlFor="phone">Phone number</label>
-//             <input type="tel" name="phone" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"/>
-//           </div>
-
-//           <div className={styles.form_control}>
-//             <label htmlFor="address">Address</label>
-//             <input type="text" name="address" />
-//           </div>
-
-//           <div className={styles.form_control}>
-//             <label htmlFor="text">Enter your problem here</label>
-//             <textarea name="text" rows="5" />
-//           </div>
-
-//           <div
-//             style={{
-//               display: "flex",
-//               justifyContent: "center",
-//               marginBottom: "20px",
-//             }}
-//           >
-//             <button className={styles.bookbtn} type="submit">Book Service</button>
-//           </div>
-
-//           {/*<div>{name + " " + email + " " + text}</div>*/}
-//         </form>
-//       </div>
-//       <div className={styles.contact_image}>
-//         <img src="/Images/booking provider.png" alt="Booking" />
-//       </div>
-//     </section>
-//     <Footer/>
-//     </>
-//   );
-// };
-
-// export default  BookingForm;
-
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
@@ -393,6 +14,8 @@ const BookingForm = () => {
 
   const [address, setAddress] = useState("");
   const [description, setDescription] = useState("");
+  const [date, setDate] = useState("");
+  const [time, setTime] = useState("");
   const location = useLocation();
   const navigate = useNavigate();
   const {
@@ -416,6 +39,28 @@ const BookingForm = () => {
   const handleBookService = async (e) => {
     e.preventDefault(); // Prevent the default form submission behavior
 
+    if (!address) {
+      toast.error("Add any address for your service");
+      return;
+    }
+
+    if (!description) {
+      toast.error("Add description for your service");
+      return;
+    }
+
+    // if (!date) {
+    //   toast.error("Add suitable date for your service");
+    //   return;
+    // }
+
+    // if (!time) {
+    //   toast.error("Add suitable time for your service");
+    //   return;
+    // }
+
+
+
     try {
       let response = await fetch("http://localhost:4500/bookService", {
         method: "POST",
@@ -424,15 +69,15 @@ const BookingForm = () => {
           serviceTakerName,
           serviceTakerPhone,
           serviceTakerImage,
-
           serviceProviderId,
           serviceProviderName,
           serviceProviderPhone,
           serviceProviderImage,
-
           category,
           address,
           description,
+          date,
+          time,
         }),
         headers: { "Content-Type": "application/json" },
       });
@@ -449,8 +94,9 @@ const BookingForm = () => {
         toast.error(result.result);
       } else {
         toast.success("Service has been requested successfully!");
-        navigate("/services");
-        toast.success("Service has been requested successfully!");
+        setTimeout(() => {
+          navigate("/services");
+        }, 2000); // Delay navigation to allow the toast message to be displayed
       }
     } catch (error) {
       console.error("Error occurred during fetch:", error);
@@ -464,7 +110,7 @@ const BookingForm = () => {
       <h1 className={styles.main_heading}>Book your service here</h1>
       <section className={styles.book_container}>
         <div className={styles.contact_form}>
-          <form className="form" onSubmit={handleBookService}>
+          <form className="form">
             <div className={styles.form_control}>
               <label htmlFor="name">Name</label>
               <input
@@ -491,8 +137,32 @@ const BookingForm = () => {
               <input
                 type="tel"
                 name="phone"
-                pattern="{3}-[0-9]{2}-[0-9]{3}"
+                pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                 value={serviceProviderPhone}
+                readOnly
+              />
+            </div>
+
+            <div className={styles.form_control}>
+              <label htmlFor="date">Date</label>
+              <input
+                type="date"
+                name="date"
+                value={date}
+                min={new Date().toISOString().split("T")[0]}
+                onChange={(e) => setDate(e.target.value)}
+                required
+              />
+            </div>
+
+            <div className={styles.form_control}>
+              <label htmlFor="time">Time</label>
+              <input
+                type="time"
+                name="time"
+                value={time}
+                onChange={(e) => setTime(e.target.value)}
+                required
               />
             </div>
 
@@ -501,7 +171,9 @@ const BookingForm = () => {
               <input
                 type="text"
                 name="address"
+                value={address}
                 onChange={(e) => setAddress(e.target.value)}
+                required
               />
             </div>
 
@@ -510,7 +182,9 @@ const BookingForm = () => {
               <textarea
                 name="text"
                 rows="5"
+                value={description}
                 onChange={(e) => setDescription(e.target.value)}
+                required
               />
             </div>
 
@@ -521,14 +195,18 @@ const BookingForm = () => {
                 marginBottom: "20px",
               }}
             >
-              <button className={styles.bookbtn} type="submit">
+              <button
+                onClick={handleBookService}
+                className={styles.bookbtn}
+                type="submit"
+              >
                 Book Service
               </button>
             </div>
           </form>
         </div>
-        <div className={styles.contact_image}>
-          <img src="/Images/booking provider.png" alt="Booking" />
+        <div className={styles.booking_image}>
+          <img src="/Images/book.png" alt="Booking" />
         </div>
       </section>
       <Footer />

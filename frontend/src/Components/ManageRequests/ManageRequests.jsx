@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import styles from './ManageRequests.module.css';
 import Navbar from '../Navbar/Navbar';
+import PendingDetailsModal from '../AllModals/PendingDetailsModal/PendingDetailsModal';
+
 
 const ManageRequests = () => {
 
@@ -9,6 +11,9 @@ const ManageRequests = () => {
 
     const [userId, setUserId] = useState("");
     const [bookings, setBookings] = useState([]);
+    const [selectedBooking, setSelectedBooking] = useState(null); // State to manage selected booking
+    const [showModal, setShowModal] = useState(false); // State to manage modal visibility
+
 
     useEffect(() => {
         const storedUser = JSON.parse(localStorage.getItem("loginusers"));
@@ -63,11 +68,21 @@ const ManageRequests = () => {
             }
         }
     };
+    const viewDetails = (booking) => {
+        setSelectedBooking(booking);
+        setShowModal(true); // Show the modal when viewing details
+    };
+
+    const closeDetails = () => {
+        setSelectedBooking(null);
+        setShowModal(false); // Close the modal
+    };
+
 
     return (
       <>
       <Navbar/>
-        <h1 className={styles.main_heading}>{userName}'s BOOKINGS Requests</h1>
+        <h1 className={styles.main_heading}>{userName}'s PENDING REQUESTS</h1>
         <div className={styles.bookingsContainer}>
             <table className={styles.bookingsTable}>
                 <thead>
@@ -86,7 +101,7 @@ const ManageRequests = () => {
                                 <td className={styles.tableCell}>{booking.serviceTakerName}</td>
                                 <td className={styles.tableCell}>{booking.currentStatus}</td>
                                 <td className={styles.tableCell}>
-                                    <button className={styles.actionButton}>View Details</button>
+                                    <button onClick={() => viewDetails(booking)} className={styles.actionButton}>View Details</button>
                                     <button className={styles.actionButton} onClick={() => handleAcceptRequest(booking._id)}>Accept</button>
                                     <button className={styles.actionButton}>Reject</button>
                                 </td>
@@ -100,6 +115,9 @@ const ManageRequests = () => {
                 </tbody>
             </table>
         </div>
+        {showModal && (
+                <PendingDetailsModal booking={selectedBooking} onClose={closeDetails} />
+            )}
         </>
     );
 };

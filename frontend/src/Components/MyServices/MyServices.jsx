@@ -346,7 +346,7 @@ export const MyServices = () => {
                                             className={styles.cardBtn} 
                                             onClick={() => handleUpdateProfile(profile)}
                                         >
-                                            Update Profile
+                                            Update Services
                                         </button>
                                         <button 
                                             type="button" 

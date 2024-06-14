@@ -72,11 +72,11 @@ align-items: center;
 }
 
 .rupee_symbol {
-padding: 7.5px;
+padding: 8.5px;
 background: #ffffff;
 border: 1px solid #3d3d3d;
 border-right: none;
-font-size: 16px;
+font-size: 14px;
 }
 
 .price_input input {
