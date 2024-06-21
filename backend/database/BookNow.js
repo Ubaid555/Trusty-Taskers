@@ -9,10 +9,12 @@ const bookingSchema = new mongoose.Schema({
   serviceProviderName: String,
   serviceProviderPhone: Number,
   serviceProviderImage: String,
+  date:String,
+  time:String,
   category: String,
   address: String,
   description: String,
-  currentStatus: String
+  currentStatus: String,
 });
 
 module.exports = mongoose.model("Booking", bookingSchema);

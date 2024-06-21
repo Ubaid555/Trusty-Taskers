@@ -100,6 +100,7 @@ import password_icon from '../Assets/password.png';
 export const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false); // State for toggling password visibility
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -110,7 +111,7 @@ export const Login = () => {
     }, [navigate]);
 
     useEffect(() => {
-        document.title = "Trusty Tasker - Login";
+        document.title = "Trusty Taskers - Login";
     }, []);
 
     const handleLogin = async () => {
@@ -137,7 +138,7 @@ export const Login = () => {
                 localStorage.setItem("loginusers", JSON.stringify(result));
                 toast.success("Login successful! Redirecting...");
                 setTimeout(() => {
-                    navigate('/');
+                    navigate('/overview');
                 }, 1000); // Redirect after 2 seconds
             } else if (response.status === 404) {
                 toast.error("This user is not registered");
@@ -151,40 +152,49 @@ export const Login = () => {
             toast.error("Something went wrong. Please try again later.");
         }
     }
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+    }
 
     return (
         <>
             <Navbar />
-            <div className={styles.container}>
-                <div className={styles.login}>
-                    <h1 className={styles.text}>LOG IN</h1>
-                    <div className={styles.underline}></div>
+            <div className={styles.whole_contents}>
+                <div className={styles.container}>
+                    <div className={styles.login}>
+                        <h1 className={styles.text}>LOG IN</h1>
+                        <div className={styles.underline}></div>
 
-                    <div className={styles.inputs}>
-                        <div className={styles.input}>
-                            <img src={email_icon} alt='' className={styles.inputImg} />
-                            <input className={styles.inputBox}
-                                type='text'
-                                placeholder='Enter Email'
-                                onChange={(e) => setEmail(e.target.value)}
-                                value={email} />
+                        <div className={styles.inputs}>
+                            <div className={styles.input}>
+                                <img src={email_icon} alt='' className={styles.inputImg} />
+                                <input className={styles.inputBox}
+                                    type='text'
+                                    placeholder='Enter Email'
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    value={email} />
+                            </div>
+
+                            <div className={styles.input}>
+                                <img src={password_icon} alt='' className={styles.inputImg} />
+                                <input className={styles.inputBox}
+                                    type={showPassword ? 'text' : 'password'}
+                                    placeholder='Enter Password'
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    value={password} />
+                                <i 
+                                    className={`fa ${showPassword ? 'fa-eye-slash' : 'fa-eye'} ${styles.eyeIcon}`}
+                                    onClick={togglePasswordVisibility}
+                                ></i>
+                            </div>
                         </div>
 
-                        <div className={styles.input}>
-                            <img src={password_icon} alt='' className={styles.inputImg} />
-                            <input className={styles.inputBox}
-                                type='password'
-                                placeholder='Enter Password'
-                                onChange={(e) => setPassword(e.target.value)}
-                                value={password} />
+                        <div className={styles.forgot_password}>
+                            Forgot Password?<NavLink to="/forgotpassword"><span>Click Here!</span></NavLink>
                         </div>
-                    </div>
 
-                    <div className={styles.forgot_password}>
-                        Forgot Password?<NavLink to="/forgotpassword"><span>Click Here!</span></NavLink>
+                        <NavLink className={styles.appButton} onClick={handleLogin}>LOG IN</NavLink>
                     </div>
-
-                    <NavLink className={styles.appButton} onClick={handleLogin}>LOG IN</NavLink>
                 </div>
             </div>
             <ToastContainer />

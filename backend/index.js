@@ -4,6 +4,7 @@ const User = require("./database/User");
 const Service = require("./database/Services");
 //const Booking = require("./database/BookNow");
 const Booking = require("./database/BookNow");
+let Counter = require ("./database/Counter");
 const cors = require("cors");
 // const Services = require("./database/Services");
 
@@ -51,6 +52,41 @@ app.post("/login", async (req, resp) => {
   }
 });
 
+async function updateCount(counterType) {
+  try {
+    let existingCounter = await Counter.findOne();
+
+    if (!existingCounter) {
+      const initialCounter = new Counter({
+        totalServices: 50,
+        totalServicesRequested: 35,
+        totalServicesConfirmed: 25,
+        totalServicesCompleted: 15
+      });
+      await initialCounter.save();
+    } else {
+      if (counterType==="Registered"){
+        existingCounter.totalServices+=1;
+        await existingCounter.save();
+      }
+      else if(counterType==="Pending"){
+        existingCounter.totalServicesRequested+=1;
+        await existingCounter.save();
+       }
+       else if(counterType==="Confirmed"){
+        existingCounter.totalServicesConfirmed+=1;
+        await existingCounter.save();
+       }
+       else if(counterType==="Completed"){
+        existingCounter.totalServicesCompleted+=1;
+        await existingCounter.save();
+       }
+    }
+  } catch (error) {
+    console.error('Error updating counter:', error);
+  }
+}
+
 function verifyToken(req, resp, next) {
   let token = req.headers["authorization"];
   if (token) {
@@ -81,19 +117,24 @@ app.post("/forgotpassword", async (req, resp) => {
 
 //Add New Service
 app.post("/services", async (req, resp) => {
-  let service;
   let category = req.body.category;
   let userId = req.body.userId;
 
-  const existingUser = await Service.findOne({ userId, category });
-  if (existingUser) {
-    return resp.send({
-      result: "You have Already Registered with this service",
-    });
-  } else {
-    let service = new Service(req.body);
-    let result = await service.save();
-    resp.send(result);
+  try {
+    const existingUser = await Service.findOne({ userId, category });
+    if (existingUser) {
+      return resp.send({
+        result: "You have Already Registered with this service",
+      });
+    } else {
+      let service = new Service(req.body);
+      let result = await service.save();
+      await updateCount("Registered");
+      resp.send(result);
+    }
+  } catch (error) {
+    console.error(`Error saving service: ${error}`);
+    resp.status(500).send({ message: "Internal Server Error" });
   }
 });
 
@@ -123,8 +164,10 @@ app.get("/services", async (req, resp) => {
 });
 
 app.get("/showProfile", async(req,resp)=>{
+
     let user = req.query.userId;
-    let result = await Service.find({userId : user});
+    let result = await User.find({_id : user});
+    console.log(result)
     resp.send(result)
 })
 
@@ -187,8 +230,10 @@ app.post("/bookService", async (req, resp) => {
         result: "You have Already Booked this service with this user",
       });
     } else {
-      let bookingData = { ...req.body, currentStatus: "Pending" };
+     
+      let bookingData = { ...req.body, currentStatus: "Pending"};
       let booking = new Booking(bookingData);
+      await updateCount("Pending");
       let result = await booking.save();
       resp.send(result);
     }
@@ -214,20 +259,11 @@ app.get("/viewBookingDetails", async (req, res) => {
   }
 });
 
-
-//show all Booking's that are pending to Service Provider 
-app.get("/showBookingRequests",async(req,resp)=>{
-  let currentUser = req.query.userId;
-  let result = await Booking.find({serviceProviderId : currentUser,currentStatus : "Pending"});
-  if(result){
-    resp.send(result)
-  }
-})
-
 //show all Booking's that are ongoing
 app.get("/showBookingRequestsConfirmed",async(req,resp)=>{
   let currentUser = req.query.userId;
-  let result = await Booking.find({serviceProviderId : currentUser,currentStatus : "Confirmed"});
+  let currentStatus=req.query.status;
+  let result = await Booking.find({serviceProviderId : currentUser,currentStatus : currentStatus});
   if(result){
     resp.send(result)
   }
@@ -239,6 +275,7 @@ app.put("/handleBookingRequest", async (req, resp) => {
     let bookingId = req.query.bookingId;
     let currentStatus=req.body.status;
     let result = await Booking.updateOne({ _id: bookingId }, { $set: { currentStatus: currentStatus} });
+    await updateCount(currentStatus);
     resp.send(result);
   } catch (error) {
     console.error("Error handling accepting request:", error);
@@ -246,7 +283,17 @@ app.put("/handleBookingRequest", async (req, resp) => {
   }
 });
 
-//Handling Cancelation Of Any Order
+//Overview overall Services on the app 
+app.get("/overview",async(req,resp)=>{
+  console.log("Waiting For Responce1");
+  let result = await Counter.find();
+  if(result){
+    console.log("Waiting For Responce2");
+    console.log(result);
+    resp.send(result)
+    console.log("Waiting For Responce3");
+  }
+})
 
 
 

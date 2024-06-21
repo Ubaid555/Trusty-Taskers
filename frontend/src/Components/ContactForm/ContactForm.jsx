@@ -1,5 +1,5 @@
 import Button from "../Button/Button";
-import styles from "./Contact.module.css";
+import styles from "./ContactForm.module.css";
 import { MdMessage } from "react-icons/md";
 import { FaPhoneAlt } from "react-icons/fa";
 //import WhatsAppIcon from '@mui/icons-material/WhatsApp';

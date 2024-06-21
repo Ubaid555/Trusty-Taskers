@@ -27,6 +27,10 @@ const BookingForm = () => {
   } = location.state || {};
 
   useEffect(() => {
+    document.title = "Trusty Taskers - Booking Form";
+  }, []);
+
+  useEffect(() => {
     const userData = JSON.parse(localStorage.getItem("loginusers"));
     if (userData) {
       setServiceTakerId(userData._id);
@@ -35,6 +39,12 @@ const BookingForm = () => {
       setServiceTakerImage(userData.image);
     }
   }, []);
+
+  const handleDateChange = (e) => {
+    const selectedDate = e.target.value; // This will be in YYYY-MM-DD format
+    const formattedDate = selectedDate.split("T")[0]; 
+    setDate(formattedDate); // Update the state with the formatted date
+  };
 
   const handleBookService = async (e) => {
     e.preventDefault(); // Prevent the default form submission behavior
@@ -49,17 +59,15 @@ const BookingForm = () => {
       return;
     }
 
-    // if (!date) {
-    //   toast.error("Add suitable date for your service");
-    //   return;
-    // }
+    if (!date) {
+      toast.error("Add suitable date for your service");
+      return;
+    }
 
     // if (!time) {
     //   toast.error("Add suitable time for your service");
     //   return;
     // }
-
-
 
     try {
       let response = await fetch("http://localhost:4500/bookService", {
@@ -116,7 +124,7 @@ const BookingForm = () => {
               <input
                 type="text"
                 name="name"
-                value={serviceTakerName}
+                value={serviceProviderName}
                 readOnly
               />
             </div>
@@ -150,7 +158,7 @@ const BookingForm = () => {
                 name="date"
                 value={date}
                 min={new Date().toISOString().split("T")[0]}
-                onChange={(e) => setDate(e.target.value)}
+                onChange={handleDateChange}
                 required
               />
             </div>

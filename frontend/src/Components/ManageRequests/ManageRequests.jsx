@@ -2,18 +2,18 @@ import React, { useState, useEffect } from 'react';
 import styles from './ManageRequests.module.css';
 import Navbar from '../Navbar/Navbar';
 import PendingDetailsModal from '../AllModals/PendingDetailsModal/PendingDetailsModal';
-
+import RequestConfirmModal from '../AllModals/RequestConfirmModal/RequestConfirmModal';
 
 const ManageRequests = () => {
-
     const user = JSON.parse(localStorage.getItem("loginusers"));
     const userName = user ? user.name : "User";
 
     const [userId, setUserId] = useState("");
     const [bookings, setBookings] = useState([]);
     const [selectedBooking, setSelectedBooking] = useState(null); // State to manage selected booking
-    const [showModal, setShowModal] = useState(false); // State to manage modal visibility
-
+    const [showModal, setShowModal] = useState(false); // State to manage details modal visibility
+    const [showConfirmModal, setShowConfirmModal] = useState(false); // State to manage confirm modal visibility
+    const [bookingToConfirm, setBookingToConfirm] = useState(null); // State to manage booking to be confirmed
 
     useEffect(() => {
         const storedUser = JSON.parse(localStorage.getItem("loginusers"));
@@ -25,7 +25,7 @@ const ManageRequests = () => {
     useEffect(() => {
         const fetchBookings = async () => {
             try {
-                let response = await fetch(`http://localhost:4500/showBookingRequests?userId=${userId}`, {
+                let response = await fetch(`http://localhost:4500/showBookingRequestsConfirmed?userId=${userId}&status=Pending`, {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json"
@@ -68,6 +68,7 @@ const ManageRequests = () => {
             }
         }
     };
+
     const viewDetails = (booking) => {
         setSelectedBooking(booking);
         setShowModal(true); // Show the modal when viewing details
@@ -78,48 +79,71 @@ const ManageRequests = () => {
         setShowModal(false); // Close the modal
     };
 
+    const confirmAcceptRequest = (booking) => {
+        setBookingToConfirm(booking);
+        setShowConfirmModal(true); // Show the confirm modal
+    };
+
+    const handleConfirm = () => {
+        if (bookingToConfirm) {
+            handleAcceptRequest(bookingToConfirm._id);
+        }
+        setShowConfirmModal(false); // Close the confirm modal
+    };
+
+    const handleCancel = () => {
+        setBookingToConfirm(null);
+        setShowConfirmModal(false); // Close the confirm modal
+    };
 
     return (
-      <>
-      <Navbar/>
-        <h1 className={styles.main_heading}>{userName}'s PENDING REQUESTS</h1>
-        <div className={styles.bookingsContainer}>
-            <table className={styles.bookingsTable}>
-                <thead>
-                    <tr className={styles.tableRow}>
-                        <th className={styles.tableHeader}>Service Name</th>
-                        <th className={styles.tableHeader}>Requester Name</th>
-                        <th className={styles.tableHeader}>Status</th>
-                        <th className={styles.tableHeader}>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {bookings.length > 0 ? (
-                        bookings.map((booking) => (
-                            <tr key={booking._id} className={styles.tableRow}>
-                                <td className={styles.tableCell}>{booking.category}</td>
-                                <td className={styles.tableCell}>{booking.serviceTakerName}</td>
-                                <td className={styles.tableCell}>{booking.currentStatus}</td>
-                                <td className={styles.tableCell}>
-                                    <button onClick={() => viewDetails(booking)} className={styles.actionButton}>View Details</button>
-                                    <button className={styles.actionButton} onClick={() => handleAcceptRequest(booking._id)}>Accept</button>
-                                    <button className={styles.actionButton}>Reject</button>
-                                </td>
-                            </tr>
-                        ))
-                    ) : (
+        <>
+            <Navbar />
+            <h1 className={styles.main_heading}>{userName}'s PENDING REQUESTS</h1>
+            <div className={styles.bookingsContainer}>
+                <table className={styles.bookingsTable}>
+                    <thead>
                         <tr className={styles.tableRow}>
-                            <td colSpan="4" className={styles.noBookings}>No bookings found</td>
+                            <th className={styles.tableHeader}>Service Name</th>
+                            <th className={styles.tableHeader}>Requester Name</th>
+                            <th className={styles.tableHeader}>Status</th>
+                            <th className={styles.tableHeader}>Actions</th>
                         </tr>
-                    )}
-                </tbody>
-            </table>
-        </div>
-        {showModal && (
+                    </thead>
+                    <tbody>
+                        {bookings.length > 0 ? (
+                            bookings.map((booking) => (
+                                <tr key={booking._id} className={styles.tableRow}>
+                                    <td className={styles.tableCell}>{booking.category}</td>
+                                    <td className={styles.tableCell}>{booking.serviceTakerName}</td>
+                                    <td className={styles.tableCell}>{booking.currentStatus}</td>
+                                    <td className={styles.tableCell}>
+                                        <button onClick={() => viewDetails(booking)} className={styles.actionButton}>View Details</button>
+                                        <button className={styles.actionButton} onClick={() => confirmAcceptRequest(booking)}>Accept</button>
+                                        <button className={styles.actionButton}>Reject</button>
+                                    </td>
+                                </tr>
+                            ))
+                        ) : (
+                            <tr className={styles.tableRow}>
+                                <td colSpan="4" className={styles.noBookings}>No bookings found</td>
+                            </tr>
+                        )}
+                    </tbody>
+                </table>
+            </div>
+            {showModal && (
                 <PendingDetailsModal booking={selectedBooking} onClose={closeDetails} />
+            )}
+            {showConfirmModal && (
+                <RequestConfirmModal 
+                    show={showConfirmModal}
+                    onConfirm={handleConfirm} 
+                    onCancel={handleCancel} 
+                />
             )}
         </>
     );
 };
 
-export default ManageRequests
+export default ManageRequests;

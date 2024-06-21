@@ -54,7 +54,22 @@ form{
 }
 
 .contact_image img{
-  margin-left: 10px;
+  margin-left: 20px;
+}
+
+@media screen and (max-width: 1330px) {
+  .contact_image img {
+    order: 1;
+    height: 500px;
+    width: 400px;
+  }
+}
+@media screen and (max-width: 1130px) {
+  .contact_image img {
+    order: 1;
+    height: 500px;
+    width: 330px;
+  }
 }
 
 @media screen and (max-width: 1060px) {
@@ -67,8 +82,8 @@ form{
   }
   .contact_image img {
     order: 1;
-    height: 300px;
-    width: 350px;
+    height: 350px;
+    width: 400px;
     margin-bottom: 30px;
   }
   .contact_form {
@@ -83,5 +98,13 @@ form{
     justify-content: center;
     width: 100%; /* Set buttons width to 100% */
     max-width: 600px; /* Adjust maximum width as needed */
+  }
+}
+@media screen and (max-width: 768px) {
+  .contact_image img {
+    order: 1;
+    height: 300px;
+    width: 300px;
+    margin-bottom: 30px;
   }
 }

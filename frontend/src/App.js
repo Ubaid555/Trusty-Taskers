@@ -25,7 +25,8 @@ import Dashboard from './Components/Dashboard/Dashboard';
 import ViewProfile from './Components/ViewProfile/ViewProfile';
 import ManageRequests from './Components/ManageRequests/ManageRequests';
 import ConfirmedBookings from './Components/ConfirmedBookings/ConfirmedBookings';
-//import { Logout } from './Components/Logout component/Logout';
+import CompletedBookings from './Components/CompletedBookings/CompletedBookings';
+import Overview from './Components/Overview/Overview';
 
 function App() {
   
@@ -52,6 +53,8 @@ function App() {
             <Route path="/profile" element={<ViewProfile/>} />
             <Route path="/managerequests" element={<ManageRequests/>} />
             <Route path="/confirmedbookings" element={<ConfirmedBookings/>} />
+            <Route path="/completedbookings" element={<CompletedBookings/>} />
+            <Route path="/overview" element={<Overview/>} />
            </Route>
 
             <Route path='*' element={<NotFound />} />
