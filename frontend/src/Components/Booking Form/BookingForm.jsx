@@ -68,7 +68,7 @@ const BookingForm = () => {
     //   toast.error("Add suitable time for your service");
     //   return;
     // }
-
+ 
     try {
       let response = await fetch("http://localhost:4500/bookService", {
         method: "POST",

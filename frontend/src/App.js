@@ -27,6 +27,7 @@ import ManageRequests from './Components/ManageRequests/ManageRequests';
 import ConfirmedBookings from './Components/ConfirmedBookings/ConfirmedBookings';
 import CompletedBookings from './Components/CompletedBookings/CompletedBookings';
 import Overview from './Components/Overview/Overview';
+import UpdateBooking from './Components/Update Booking/UpdateBooking';
 
 function App() {
   
@@ -47,6 +48,8 @@ function App() {
             <Route path='/addservice' element={<AddServices/>}/>
             <Route path='/allusers' element={<AllUsers/>}/>
             <Route path="/updateprofile" element={<UpdateProfile/>} />
+            
+            <Route path="/updatebooking" element={<UpdateBooking/>} />
             <Route path="/servicerequests" element={<ServiceRequests/>} />
             <Route path="/mybookings" element={<MyBookings/>} />
             <Route path="/dashboard" element={<Dashboard/>} />

@@ -1,3 +1,5 @@
+
+
 const express = require("express");
 require("./database/config");
 const User = require("./database/User");
@@ -163,13 +165,19 @@ app.get("/services", async (req, resp) => {
   } 
 });
 
-app.get("/showProfile", async(req,resp)=>{
-
+app.get("/overviewProfile", async(req,resp)=>{
     let user = req.query.userId;
     let result = await User.find({_id : user});
-    console.log(result)
     resp.send(result)
 })
+
+app.get("/showProfile", async(req,resp)=>{
+    let userId = req.query.userId;
+    let result = await Service.find({userId : userId});
+    resp.send(result)
+})
+
+
 
 app.put("/updateProfile",async(req,resp)=>{
   let category = req.body.category;
@@ -225,7 +233,8 @@ app.post("/bookService", async (req, resp) => {
     let serviceTakerId = req.body.serviceTakerId;
     
     const existingUser = await Booking.findOne({ category, serviceProviderId, serviceTakerId });
-    if (existingUser) {
+    console.log(existingUser.currentStatus)
+    if (existingUser.currentStatus=="Pending" || existingUser.currentStatus=="Confirmed") {
       return resp.send({
         result: "You have Already Booked this service with this user",
       });
@@ -285,14 +294,23 @@ app.put("/handleBookingRequest", async (req, resp) => {
 
 //Overview overall Services on the app 
 app.get("/overview",async(req,resp)=>{
-  console.log("Waiting For Responce1");
   let result = await Counter.find();
   if(result){
-    console.log("Waiting For Responce2");
-    console.log(result);
     resp.send(result)
-    console.log("Waiting For Responce3");
   }
+})
+
+app.put("/updateBooking",async(req,resp)=>{
+  console.log("welcome in update boking")
+  let bookingId = req.body._id;
+  console.log(bookingId)
+  let result=  await Booking.updateOne(
+    {_id:bookingId},{$set:req.body}
+)
+console.group(result);
+if(result.matchedCount==1){
+  resp.send({ result: "Result successfully Updated" });
+}
 })
 
 

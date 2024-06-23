@@ -1,16 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import styles from './MyBookings.module.css';
+import { useNavigate } from 'react-router-dom';
 import Navbar from '../Navbar/Navbar';
 import BookingDetailsModal from '../AllModals/BookingDetailsModal/BookingDetailsModal';
+import Dashboard from '../Dashboard/Dashboard';
+
 
 const MyBookings = () => {
+    const navigate = useNavigate();
     const user = JSON.parse(localStorage.getItem("loginusers"));
     const userName = user ? user.name : "User";
 
     const [userId, setUserId] = useState("");
     const [bookings, setBookings] = useState([]);
-    const [selectedBooking, setSelectedBooking] = useState(null); // State to manage selected booking
-    const [showModal, setShowModal] = useState(false); // State to manage modal visibility
+    const [selectedBooking, setSelectedBooking] = useState(null); 
+    const [showModal, setShowModal] = useState(false); 
+
+    useEffect(() => {
+        document.title = "Trusty Taskers - My Bookings";
+    }, []);
 
     useEffect(() => {
         const storedUser = JSON.parse(localStorage.getItem("loginusers"));
@@ -18,6 +26,10 @@ const MyBookings = () => {
             setUserId(storedUser._id);
         }
     }, []);
+
+    const handleUpdateBookingRequest = (booking) => {
+        navigate('/updatebooking', { state: { booking } });
+    };
 
     useEffect(() => {
         const fetchBookings = async () => {
@@ -40,7 +52,7 @@ const MyBookings = () => {
         }
     }, [userId]);
 
-    //Handling Cancel Button
+    // Handling Cancel Button
     const handleCancelRequest = async (bookingId) => {
         if (bookingId) {
             try {
@@ -49,15 +61,15 @@ const MyBookings = () => {
                     headers: {
                         "Content-Type": "application/json"
                     },
-                     body: JSON.stringify({ status: 'Cancelled' })
+                    body: JSON.stringify({ status: 'Cancelled' })
                 });
-    
+
                 if (!update.ok) {
                     throw new Error('Network response was not ok');
                 }
-    
+
                 let result = await update.json();
-                if(result.modifiedCount===1){
+                if (result.modifiedCount === 1) {
                     window.location.reload();
                 }
                 console.log("Update result:", result);
@@ -77,9 +89,20 @@ const MyBookings = () => {
         setShowModal(false); // Close the modal
     };
 
+    const sortedBookings = bookings.sort((a, b) => {
+        if (a.currentStatus === 'Cancelled' && b.currentStatus !== 'Cancelled') {
+            return 1;
+        }
+        if (a.currentStatus !== 'Cancelled' && b.currentStatus === 'Cancelled') {
+            return -1;
+        }
+        return 0;
+    });
+
     return (
         <>
             <Navbar />
+            <Dashboard />
             <h1 className={styles.main_heading}>{userName}'s BOOKINGS</h1>
             <div className={styles.bookingsContainer}>
                 <table className={styles.bookingsTable}>
@@ -92,24 +115,26 @@ const MyBookings = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {bookings.length > 0 ? (
-                            bookings.map((booking) => (
+                        {sortedBookings.length > 0 ? (
+                            sortedBookings.map((booking) => (
                                 <tr key={booking._id} className={styles.tableRow}>
                                     <td className={styles.tableCell}>{booking.category}</td>
                                     <td className={styles.tableCell}>{booking.serviceProviderName}</td>
                                     <td className={styles.tableCell}>{booking.currentStatus}</td>
                                     <td className={styles.tableCell}>
                                         <button onClick={() => viewDetails(booking)} className={styles.actionButton}>View Details</button>
-                                        <button className={styles.actionButton}>Reschedule</button>
-                                        <button onClick={()=>handleCancelRequest(booking._id)}>Cancel</button>
+                                        <button onClick={() => handleUpdateBookingRequest(booking)} className={styles.actionButton}>Reschedule</button>
+                                        {booking.currentStatus === 'Pending' && (
+                                            <button onClick={() => handleCancelRequest(booking._id)} className={styles.actionButton}>Cancel</button>
+                                        )}
                                     </td>
                                 </tr>
                             ))
                         ) : (
-                                <tr className={styles.tableRow}>
-                                    <td colSpan="4" className={styles.noBookings}>No bookings found</td>
-                                </tr>
-                            )}
+                            <tr className={styles.tableRow}>
+                                <td colSpan="4" className={styles.noBookings}>No bookings found</td>
+                            </tr>
+                        )}
                     </tbody>
                 </table>
             </div>

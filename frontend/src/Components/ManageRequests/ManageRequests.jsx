@@ -69,6 +69,33 @@ const ManageRequests = () => {
         }
     };
 
+    const handleRejectRequest = async (bookingId, status) => {
+        if (bookingId && status) {
+            try {
+                let update = await fetch(`http://localhost:4500/handleBookingRequest?bookingId=${bookingId}`, {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                     body: JSON.stringify({ status: status })
+                });
+    
+                if (!update.ok) {
+                    throw new Error('Network response was not ok');
+                }
+    
+                let result = await update.json();
+                if(result.modifiedCount === 1){
+                    window.location.reload();
+                }
+                console.log("Update result:", result);
+            } catch (error) {
+                console.error("Error updating booking status:", error);
+            }
+        }
+    };
+
+
     const viewDetails = (booking) => {
         setSelectedBooking(booking);
         setShowModal(true); // Show the modal when viewing details
@@ -96,6 +123,8 @@ const ManageRequests = () => {
         setShowConfirmModal(false); // Close the confirm modal
     };
 
+    
+
     return (
         <>
             <Navbar />
@@ -120,7 +149,7 @@ const ManageRequests = () => {
                                     <td className={styles.tableCell}>
                                         <button onClick={() => viewDetails(booking)} className={styles.actionButton}>View Details</button>
                                         <button className={styles.actionButton} onClick={() => confirmAcceptRequest(booking)}>Accept</button>
-                                        <button className={styles.actionButton}>Reject</button>
+                                        <button className={styles.actionButton} onClick={() => handleRejectRequest(booking._id, "Cancelled")}>Reject</button>
                                     </td>
                                 </tr>
                             ))

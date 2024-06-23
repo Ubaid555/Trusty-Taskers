@@ -27,8 +27,10 @@ const BookingDetailsModal = ({ booking, onClose }) => {
                 <img
                     className={styles.providerImg}
                     src={booking.serviceProviderImage}
+                    
                     alt="profile-img"
                 />
+                console.log("abc");
                 <p><strong>Service Name:</strong> {booking.category}</p>
                 <p><strong>Provider Name:</strong> {booking.serviceProviderName}</p>
                 <p><strong>Provider Phone:</strong> {booking.serviceProviderPhone}</p>

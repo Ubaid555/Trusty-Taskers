@@ -168,7 +168,7 @@ const ConfirmedBookings = () => {
         }
     }, [userId]);
 
-    const handleAcceptRequest = async (bookingId, status) => {
+    const handleRejectRequest = async (bookingId, status) => {
         if (bookingId && status) {
             try {
                 let update = await fetch(`http://localhost:4500/handleBookingRequest?bookingId=${bookingId}`, {
@@ -211,7 +211,7 @@ const ConfirmedBookings = () => {
 
     const handleConfirm = () => {
         if (bookingToComplete) {
-            handleAcceptRequest(bookingToComplete._id, "Completed");
+            handleRejectRequest(bookingToComplete._id, "Completed");
         }
         setShowCompleteModal(false); // Close the complete modal
     };
@@ -245,7 +245,7 @@ const ConfirmedBookings = () => {
                                     <td className={styles.tableCell}>
                                         <button onClick={() => viewDetails(booking)} className={styles.actionButton}>View Details</button>
                                         <button className={styles.actionButton} onClick={() => confirmCompleteRequest(booking)}>Complete</button>
-                                        <button className={styles.actionButton} onClick={() => handleAcceptRequest(booking._id, "Cancelled")}>Reject</button>
+                                        <button className={styles.actionButton} onClick={() => handleRejectRequest(booking._id, "Cancelled")}>Reject</button>
                                     </td>
                                 </tr>
                             ))
