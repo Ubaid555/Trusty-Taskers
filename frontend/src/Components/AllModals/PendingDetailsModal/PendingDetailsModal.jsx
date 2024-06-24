@@ -32,6 +32,8 @@ const BookingDetailsModal = ({ booking, onClose }) => {
                 <p><strong>Service Name:</strong> {booking.category}</p>
                 <p><strong>Seeker Name:</strong> {booking.serviceTakerName}</p>
                 <p><strong>Seeker Phone:</strong> {booking.serviceTakerPhone}</p>
+                <p><strong>Service Date:</strong> {booking.date}</p>
+                <p><strong>Service Time:</strong> {booking.time}</p>
                 <p><strong>Status:</strong> {booking.currentStatus}</p>
                 <p><strong>Address:</strong> {booking.address}</p>
                 <p><strong>Description:</strong> {booking.description}</p>

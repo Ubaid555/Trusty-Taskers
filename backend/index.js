@@ -171,11 +171,27 @@ app.get("/overviewProfile", async(req,resp)=>{
     resp.send(result)
 })
 
-app.get("/showProfile", async(req,resp)=>{
-    let userId = req.query.userId;
-    let result = await Service.find({userId : userId});
-    resp.send(result)
-})
+// app.get("/showProfile", async(req,resp)=>{
+//     let userId = req.query.userId;
+//     let result = await Service.find({userId : userId});
+//     resp.send(result)
+// })
+
+app.get("/showProfile", async (req, resp) => {
+  const userId = req.query.userId; // Assuming userId is passed as a query parameter
+
+  try {
+      const userProfile = await User.findOne({ _id: userId });
+
+      if (!userProfile) {
+          return resp.status(404).json({ error: "User profile not found" });
+      }
+
+      resp.json(userProfile);
+  } catch (error) {
+      resp.status(500).json({ error: error.message });
+  }
+});
 
 
 

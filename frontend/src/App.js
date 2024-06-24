@@ -27,7 +27,8 @@ import ManageRequests from './Components/ManageRequests/ManageRequests';
 import ConfirmedBookings from './Components/ConfirmedBookings/ConfirmedBookings';
 import CompletedBookings from './Components/CompletedBookings/CompletedBookings';
 import Overview from './Components/Overview/Overview';
-import UpdateBooking from './Components/Update Booking/UpdateBooking';
+import RescheduleBooking from './Components/Reschedule Booking/RescheduleBooking';
+import PasswordUpdate from './Components/PasswordUpdate/PasswordUpdate';
 
 function App() {
   
@@ -48,8 +49,6 @@ function App() {
             <Route path='/addservice' element={<AddServices/>}/>
             <Route path='/allusers' element={<AllUsers/>}/>
             <Route path="/updateprofile" element={<UpdateProfile/>} />
-            
-            <Route path="/updatebooking" element={<UpdateBooking/>} />
             <Route path="/servicerequests" element={<ServiceRequests/>} />
             <Route path="/mybookings" element={<MyBookings/>} />
             <Route path="/dashboard" element={<Dashboard/>} />
@@ -58,6 +57,8 @@ function App() {
             <Route path="/confirmedbookings" element={<ConfirmedBookings/>} />
             <Route path="/completedbookings" element={<CompletedBookings/>} />
             <Route path="/overview" element={<Overview/>} />
+            <Route path="/reschedulebooking" element={<RescheduleBooking/>} />
+            <Route path="/accountsettings" element={<PasswordUpdate/>} />
            </Route>
 
             <Route path='*' element={<NotFound />} />

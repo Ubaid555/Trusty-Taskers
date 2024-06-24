@@ -45,7 +45,7 @@ const BookingForm = () => {
     const formattedDate = selectedDate.split("T")[0]; 
     setDate(formattedDate); // Update the state with the formatted date
   };
-
+ 
   const handleBookService = async (e) => {
     e.preventDefault(); // Prevent the default form submission behavior
 

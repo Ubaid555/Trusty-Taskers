@@ -106,7 +106,7 @@ const Dashboard = () => {
               <Dropdown.Item as={NavLink} to='/profile' className={styles.dropdown_item}>
                 <i className="fa fa-user nav-icon" style={{ marginRight: '10px' }}></i> View Profile
               </Dropdown.Item>
-              <Dropdown.Item as={NavLink} to='/account-settings' className={styles.dropdown_item}>
+              <Dropdown.Item as={NavLink} to='/accountsettings' className={styles.dropdown_item}>
                 <i className="fa fa-cog" style={{ marginRight: '10px' }}></i> Account Settings
               </Dropdown.Item>
               <Dropdown.Item as={NavLink} to='/notifications' className={styles.dropdown_item}>
