@@ -1,4 +1,6 @@
-
+.whole_content{
+    overflow: hidden;
+}
 .signupContainer {
     display: flex;
     flex-direction: column;
@@ -8,7 +10,7 @@
     background: #fecaca;
     border-radius: 20px;
     animation: fadeInUp 1s ease-out;
-    margin-top: 120px;
+    margin-top: 110px;
 }
 
 .text {
@@ -55,6 +57,7 @@
 }
 
 .input {
+    position: relative;
     display: flex;
     align-items: center;
     margin: auto;
@@ -80,6 +83,15 @@
     font-size: 16px;
 }
 
+.eyeIcon {
+    position: absolute; /* Position the icon absolutely */
+    top: 50%; /* Center vertically */
+    right: 10px; /* Align to the right */
+    transform: translateY(-50%); /* Center vertically */
+    cursor: pointer; /* Change cursor to pointer */
+    color: #999; /* Icon color */
+}
+
 .appButton {
     width: 100%;
     max-width: 360px;
@@ -101,6 +113,44 @@
     font-size: 16px;
     font-weight: 600;
     color: #d01c28;
+}
+
+.verify_content {
+    text-align: center; 
+}
+.verify_content h1{
+    text-align: center;
+    margin-right: 20px; 
+}
+
+.verify_content .inputs {
+    margin-top: 20px;
+}
+.verifyButton {
+    width: 100%;
+    max-width: 360px;
+    padding: 14px 0;
+    background-color: #d01c28;
+    color: white;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+}
+
+.verify_content p{
+    text-align: center;
+    max-width: 300px;
+    font-weight: 500;
+}
+.verify_photo{
+    margin-bottom: 20px;
 }
 
 @keyframes fadeInUp {
@@ -161,6 +211,7 @@
     .signupContainer {
         width: 80%;
         margin-top: 140px;
+        margin-bottom: 50px;
     }
     .register {
         align-items: center;
