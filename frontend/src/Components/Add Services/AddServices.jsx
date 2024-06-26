@@ -69,9 +69,11 @@ const AddServices = () => {
     result = await result.json();
     console.log(result);
 
-    if (result.result === 'You have Already Registered with this service') {
+    if (result.result.toLowerCase() === 'you have already registered with this service'.toLowerCase()) {
+      console.log("abc");
       toast.error(result.result);
     } else {
+      console.log("def");
       toast.success("Service has been added successfully!");
     }
   };

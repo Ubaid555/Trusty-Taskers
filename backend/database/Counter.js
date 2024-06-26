@@ -16,7 +16,8 @@ const serviceSchema = new mongoose.Schema({
     totalServicesCompleted: {
         type: Number,
         default: 15
-    }
+    },
+    userId:String
 });
 
 const Counter = mongoose.model("Counters", serviceSchema);

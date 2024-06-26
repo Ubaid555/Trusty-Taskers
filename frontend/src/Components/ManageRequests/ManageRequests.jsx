@@ -54,7 +54,7 @@ const ManageRequests = () => {
                     headers: {
                         "Content-Type": "application/json"
                     },
-                    body: JSON.stringify({ status: 'Confirmed' })
+                    body: JSON.stringify({ status: 'Confirmed',userId })
                 });
 
                 if (!update.ok) {
@@ -80,7 +80,7 @@ const ManageRequests = () => {
                     headers: {
                         "Content-Type": "application/json"
                     },
-                    body: JSON.stringify({ status: status })
+                    body: JSON.stringify({ status: status,userId })
                 });
 
                 if (!update.ok) {

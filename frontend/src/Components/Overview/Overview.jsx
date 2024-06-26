@@ -114,14 +114,43 @@ const Overview = () => {
     const userName = user ? user.name : "User";
 
     const [data, setData] = useState(null);
+    const [userData, setUserData] = useState(null);
     const [error, setError] = useState(null);
     const [userProfile, setUserProfile] = useState(null); // Initialize with null
 
     useEffect(() => {
         const fetchData = async () => {
+            const user = JSON.parse(localStorage.getItem("loginusers"));
+                if (!user || !user._id) {
+                    console.error('User ID not found in localStorage');
+                    return;
+                }
+    
+                const userId = user._id;
             try {
-                const response = await axios.get('http://localhost:4500/overview');
+                const response = await axios.get(`http://localhost:4500/overview?userId=${userId}`);
                 setData(response.data[0]); 
+            } catch (err) {
+                setError('Error fetching data');
+            }
+        };
+
+        fetchData();
+    }, []);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const user = JSON.parse(localStorage.getItem("loginusers"));
+                if (!user || !user._id) {
+                    console.error('User ID not found in localStorage');
+                    return;
+                }
+    
+                const userId = user._id;
+            try {
+                let response = await axios.get(`http://localhost:4500/overviewUser?userId=${userId}`);
+                console.log(response);
+                setUserData(response.data[0]); 
             } catch (err) {
                 setError('Error fetching data');
             }
@@ -220,6 +249,36 @@ const Overview = () => {
                         <h2 className={styles.cardTitle}>Total Services Completed</h2>
                         <p className={styles.cardValue}>
                             <CountUp end={data.totalServicesCompleted} duration={2.5} />
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+
+            <div className={styles.overviewWrapper}>
+                <div className={styles.overview_container}>
+                    <div className={styles.card}>
+                        <h2 className={styles.cardTitle}>Total No. of Services Offered</h2>
+                        <p className={styles.cardValue}>
+                            <CountUp end={userData.totalServices} duration={2.5} />
+                        </p>
+                    </div>
+                    <div className={styles.card}>
+                        <h2 className={styles.cardTitle}>Total Services Requested</h2>
+                        <p className={styles.cardValue}>
+                            <CountUp end={userData.totalServicesRequested} duration={2.5} />
+                        </p>
+                    </div>
+                    <div className={styles.card}>
+                        <h2 className={styles.cardTitle}>Total Services Confirmed</h2>
+                        <p className={styles.cardValue}>
+                            <CountUp end={userData.totalServicesConfirmed} duration={2.5} />
+                        </p>
+                    </div>
+                    <div className={styles.card}>
+                        <h2 className={styles.cardTitle}>Total Services Completed</h2>
+                        <p className={styles.cardValue}>
+                            <CountUp end={userData.totalServicesCompleted} duration={2.5} />
                         </p>
                     </div>
                 </div>
